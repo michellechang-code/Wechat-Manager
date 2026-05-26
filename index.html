@@ -7,278 +7,220 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      fontFamily: { tc: ['Noto Sans TC', 'sans-serif'] },
-      colors: {
-        bg:      '#2c3347',
-        surface: '#323a52',
-        card:    '#3a4260',
-        border:  '#454e6e',
-        accent:  '#5b8dee',
-        accentL: '#7aa5f5',
-        muted:   '#7b88a8',
-        soft:    '#a8b4cc',
-        text:    '#dde3f0',
-      }
-    }
-  }
-}
-</script>
 <style>
-  * { font-family: 'Noto Sans TC', sans-serif; box-sizing: border-box; }
-  body { background: #2c3347; color: #dde3f0; min-height: 100vh; }
+* { font-family: 'Noto Sans TC', sans-serif; box-sizing: border-box; }
 
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: #0f1117; }
-  ::-webkit-scrollbar-thumb { background: #2a2f45; border-radius: 2px; }
+/* ── 護眼色盤（暖灰米白系） ── */
+:root {
+  --bg:       #f0ede8;   /* 頁面底色：暖米灰 */
+  --surface:  #e8e4de;   /* header/tab底色 */
+  --card:     #faf8f5;   /* 卡片白 */
+  --border:   #d4cfc8;   /* 邊框：暖灰 */
+  --border2:  #c8c2bb;   /* 深一點邊框 */
+  --accent:   #3b76d4;   /* 藍色accent */
+  --accent-bg:#deeaf8;   /* 藍色淡背景 */
+  --text-h:   #1a1a1a;   /* 標題文字 */
+  --text-b:   #3d3d3d;   /* 內文文字 */
+  --text-m:   #7a7570;   /* 次要文字 */
+  --text-s:   #a09990;   /* 更淺文字 */
+  --green:    #1a7a4a;
+  --green-bg: #d4f0e2;
+  --amber:    #8a5a00;
+  --amber-bg: #fdedc8;
+  --teal:     #0d6e6e;
+  --teal-bg:  #cceeee;
+  --red:      #b03030;
+  --red-bg:   #fde0e0;
+}
 
-  .tab-active {
-    color: #3b82f6 !important;
-    border-bottom: 2px solid #3b82f6;
-  }
-  .card-hover {
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  .card-hover:hover {
-    border-color: #3b82f6 !important;
-    box-shadow: 0 0 0 1px #3b82f633;
-  }
-  .badge {
-    display: inline-flex; align-items: center; gap: 4px;
-    font-size: 11px; font-weight: 500;
-    padding: 2px 8px; border-radius: 9999px;
-  }
-  .badge-blue   { background: #1e3a5f; color: #60a5fa; }
-  .badge-green  { background: #14312a; color: #34d399; }
-  .badge-amber  { background: #2d2008; color: #fbbf24; }
-  .badge-gray   { background: #1e2336; color: #94a3b8; border: 1px solid #2a2f45; }
-  .badge-teal   { background: #0d2d2a; color: #2dd4bf; }
-  .badge-red    { background: #2d1010; color: #f87171; }
+body { background: var(--bg); color: var(--text-b); min-height: 100vh; }
 
-  .status-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
-  .dot-green  { background: #34d399; }
-  .dot-amber  { background: #fbbf24; }
-  .dot-gray   { background: #64748b; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
-  .input-field {
-    background: #1e2336;
-    border: 1px solid #2a2f45;
-    color: #e2e8f0;
-    border-radius: 8px;
-    padding: 8px 12px;
-    font-size: 14px;
-    width: 100%;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .input-field:focus { border-color: #3b82f6; }
-  .input-field::placeholder { color: #475569; }
+/* badges */
+.badge { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:500; padding:2px 8px; border-radius:9999px; }
+.badge-blue  { background:var(--accent-bg); color:var(--accent); }
+.badge-green { background:var(--green-bg);  color:var(--green); }
+.badge-amber { background:var(--amber-bg);  color:var(--amber); }
+.badge-gray  { background:#e8e4de; color:#5a5550; border:1px solid var(--border); }
+.badge-teal  { background:var(--teal-bg);   color:var(--teal); }
+.badge-red   { background:var(--red-bg);    color:var(--red); }
 
-  select.input-field option { background: #1e2336; }
+.status-dot { width:6px; height:6px; border-radius:50%; display:inline-block; }
+.dot-green { background:var(--green); }
+.dot-amber { background:#c07800; }
+.dot-gray  { background:var(--text-s); }
 
-  .btn-primary {
-    background: #3b82f6;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 9px 18px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
-    display: inline-flex; align-items: center; gap: 6px;
-  }
-  .btn-primary:hover  { background: #2563eb; }
-  .btn-primary:active { transform: scale(0.97); }
+/* inputs */
+.input-field {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text-b);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input-field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,118,212,0.1); }
+.input-field::placeholder { color: var(--text-s); }
+select.input-field option { background: var(--card); color: var(--text-b); }
+textarea.input-field { resize: none; line-height: 1.7; }
 
-  .btn-ghost {
-    background: transparent;
-    color: #94a3b8;
-    border: 1px solid #2a2f45;
-    border-radius: 8px;
-    padding: 7px 14px;
-    font-size: 13px;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-  }
-  .btn-ghost:hover { background: #1e2336; color: #e2e8f0; }
+/* buttons */
+.btn-primary {
+  background: var(--accent); color: #fff;
+  border: none; border-radius: 8px;
+  padding: 9px 18px; font-size: 14px; font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-primary:hover  { background: #2a62c0; box-shadow: 0 2px 10px rgba(59,118,212,0.25); }
+.btn-primary:active { transform: scale(0.97); }
+.btn-primary:disabled { opacity:0.5; cursor:not-allowed; }
 
-  .type-btn {
-    padding: 5px 14px;
-    font-size: 12px;
-    border-radius: 20px;
-    border: 1px solid #2a2f45;
-    background: transparent;
-    color: #64748b;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .type-btn.active {
-    background: #1e3a5f;
-    color: #60a5fa;
-    border-color: #3b82f6;
-  }
+.btn-ghost {
+  background: transparent; color: var(--text-m);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 7px 14px; font-size: 13px; cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-ghost:hover { background: var(--border); color: var(--text-b); }
 
-  .modal-overlay {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.7);
-    z-index: 200;
-    display: flex; align-items: center; justify-content: center;
-    padding: 16px;
-  }
-  .modal-box {
-    background: #181c27;
-    border: 1px solid #2a2f45;
-    border-radius: 16px;
-    padding: 24px;
-    width: 100%; max-width: 560px;
-    max-height: 85vh; overflow-y: auto;
-  }
+.type-btn {
+  padding: 5px 14px; font-size: 12px; border-radius: 20px;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--text-m); cursor: pointer; transition: all 0.2s;
+}
+.type-btn.active { background: var(--accent-bg); color: var(--accent); border-color: var(--accent); }
 
-  mark { background: #854d0e; color: #fde68a; border-radius: 2px; padding: 0 2px; }
+/* cards */
+.msg-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+.msg-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 14px rgba(59,118,212,0.10);
+  transform: translateY(-1px);
+}
 
-  .spinner {
-    width: 18px; height: 18px;
-    border: 2px solid #1e3a5f;
-    border-top-color: #3b82f6;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    display: inline-block;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
+/* nav */
+.top-nav { background: var(--surface); border-bottom: 1px solid var(--border2); position:sticky; top:0; z-index:50; }
+.tab-bar  { background: var(--surface); border-bottom: 1px solid var(--border2); position:sticky; top:57px; z-index:40; }
 
-  .slide-in {
-    animation: slideIn 0.25s ease;
-  }
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+/* tab active */
+.tab-btn { padding:12px 20px; font-size:14px; font-weight:500; border:none; border-bottom:2px solid transparent; background:transparent; cursor:pointer; color:var(--text-m); transition: color 0.2s; }
+.tab-btn.active { color:var(--accent); border-bottom-color:var(--accent); }
 
-  .empty-state {
-    text-align: center; padding: 48px 0;
-    color: #475569;
-  }
-  .section-divider {
-    border: none; border-top: 1px solid #2a2f45; margin: 12px 0;
-  }
+/* stats */
+.stat-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:10px 16px; min-width:86px; flex-shrink:0; }
+
+/* modal */
+.modal-overlay { position:fixed; inset:0; background:rgba(80,70,60,0.45); backdrop-filter:blur(2px); z-index:200; display:flex; align-items:center; justify-content:center; padding:16px; }
+.modal-box { background:var(--card); border:1px solid var(--border2); border-radius:16px; padding:24px; width:100%; max-width:580px; max-height:88vh; overflow-y:auto; box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+
+/* misc */
+mark { background:#ffe085; color:#5a3e00; border-radius:2px; padding:0 2px; }
+.raw-block { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:12px; font-size:13px; color:var(--text-m); line-height:1.75; white-space:pre-wrap; word-break:break-all; }
+.field-box  { background:var(--bg); border-radius:8px; padding:10px 12px; }
+.field-label { font-size:11px; color:var(--text-s); margin-bottom:4px; }
+.field-value { font-size:14px; font-weight:600; color:var(--text-h); }
+.empty-state { text-align:center; padding:52px 0; color:var(--text-s); }
+.divider { display:flex; align-items:center; gap:8px; margin:14px 0 12px; }
+.divider span { font-size:11px; color:var(--text-s); white-space:nowrap; }
+.divider::before,.divider::after { content:''; flex:1; height:1px; background:var(--border); }
+.stats-row { display:flex; gap:10px; overflow-x:auto; padding-bottom:4px; margin-bottom:14px; }
+
+.spinner { width:16px; height:16px; border:2px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin 0.7s linear infinite; display:inline-block; vertical-align:middle; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.slide-in { animation:slideIn 0.22s ease; }
+@keyframes slideIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 </style>
 </head>
-<body class="min-h-screen">
+<body>
 
-<!-- TOP NAV -->
-<header class="sticky top-0 z-50" style="background:#0f1117; border-bottom: 1px solid #2a2f45;">
-  <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
-    <div class="flex items-center gap-2">
-      <div style="background:#1e3a5f; border-radius:8px; padding:6px 10px;">
-        <i class="fa-brands fa-weixin" style="color:#3b82f6; font-size:16px;"></i>
+<!-- NAV -->
+<header class="top-nav">
+  <div style="max-width:780px;margin:0 auto;padding:0 16px;height:57px;display:flex;align-items:center;justify-content:space-between;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="background:var(--accent-bg);border-radius:8px;padding:7px 10px;">
+        <i class="fa-brands fa-weixin" style="color:var(--accent);font-size:17px;"></i>
       </div>
       <div>
-        <div style="font-size:15px; font-weight:700; color:#e2e8f0; letter-spacing:0.5px;">訊息管理系統</div>
-        <div style="font-size:11px; color:#475569;">微信訊息 · 智能整理</div>
+        <div style="font-size:15px;font-weight:700;color:var(--text-h);letter-spacing:0.3px;">訊息管理系統</div>
+        <div style="font-size:11px;color:var(--text-s);">微信訊息 · 智能整理</div>
       </div>
     </div>
-    <button class="btn-ghost" style="font-size:12px; padding:6px 12px;" onclick="openImport()">
+    <button class="btn-ghost" style="font-size:13px;padding:7px 14px;display:flex;align-items:center;gap:6px;" onclick="openImport()">
       <i class="fa-solid fa-plus" style="font-size:11px;"></i> 匯入訊息
     </button>
   </div>
 </header>
 
 <!-- TABS -->
-<div class="sticky z-40" style="top:57px; background:#0f1117; border-bottom:1px solid #2a2f45;">
-  <div class="max-w-3xl mx-auto px-4">
-    <div class="flex gap-0">
-      <button id="tab-cust-btn" class="tab-active py-3 px-5 text-sm font-medium border-b-2 transition-colors"
-        style="color:#3b82f6; border-color:#3b82f6; background:transparent; cursor:pointer;"
-        onclick="switchTab('customer')">
-        <i class="fa-solid fa-users mr-1"></i> 客戶往來
-      </button>
-      <button id="tab-eng-btn" class="py-3 px-5 text-sm font-medium border-b-2 border-transparent transition-colors"
-        style="color:#64748b; background:transparent; cursor:pointer;"
-        onclick="switchTab('engineer')">
-        <i class="fa-solid fa-screwdriver-wrench mr-1"></i> 工程師任務
-      </button>
-    </div>
+<div class="tab-bar">
+  <div style="max-width:780px;margin:0 auto;padding:0 16px;display:flex;">
+    <button id="tab-cust-btn" class="tab-btn active" onclick="switchTab('customer')">
+      <i class="fa-solid fa-users" style="margin-right:5px;font-size:13px;"></i>客戶往來
+    </button>
+    <button id="tab-eng-btn" class="tab-btn" onclick="switchTab('engineer')">
+      <i class="fa-solid fa-screwdriver-wrench" style="margin-right:5px;font-size:13px;"></i>工程師任務
+    </button>
   </div>
 </div>
 
 <!-- MAIN -->
-<main class="max-w-3xl mx-auto px-4 py-4">
+<main style="max-width:780px;margin:0 auto;padding:16px;">
 
-  <!-- CUSTOMER TAB -->
+  <!-- CUSTOMER -->
   <div id="tab-customer">
-    <!-- Search -->
-    <div class="flex gap-2 mb-4">
-      <div class="relative flex-1">
-        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2" style="color:#475569; font-size:13px;"></i>
-        <input id="cust-search" class="input-field" style="padding-left:34px;"
-          placeholder="搜尋公司、聯絡人、機型、關鍵字..."
-          oninput="filterCustomer()" />
+    <div style="display:flex;gap:8px;margin-bottom:12px;">
+      <div style="flex:1;position:relative;">
+        <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text-s);font-size:13px;pointer-events:none;"></i>
+        <input id="cust-search" class="input-field" style="padding-left:34px;" placeholder="搜尋公司、聯絡人、機型、任何關鍵字..." oninput="filterCustomer()" />
       </div>
-      <select id="cust-company-filter" class="input-field" style="width:auto; min-width:100px;" onchange="filterCustomer()">
+      <select id="cust-company-filter" class="input-field" style="width:auto;min-width:96px;" onchange="filterCustomer()">
         <option value="">全部客戶</option>
       </select>
     </div>
-    <!-- Stats row -->
-    <div class="flex gap-3 mb-4 overflow-x-auto pb-1">
-      <div style="background:#1e2336; border:1px solid #2a2f45; border-radius:10px; padding:10px 16px; min-width:90px; flex-shrink:0;">
-        <div style="font-size:11px; color:#64748b; margin-bottom:2px;">總筆數</div>
-        <div id="stat-cust-total" style="font-size:22px; font-weight:700; color:#e2e8f0;">0</div>
-      </div>
-      <div style="background:#1e2336; border:1px solid #2a2f45; border-radius:10px; padding:10px 16px; min-width:90px; flex-shrink:0;">
-        <div style="font-size:11px; color:#64748b; margin-bottom:2px;">詢價中</div>
-        <div id="stat-cust-inquiry" style="font-size:22px; font-weight:700; color:#fbbf24;">0</div>
-      </div>
-      <div style="background:#1e2336; border:1px solid #2a2f45; border-radius:10px; padding:10px 16px; min-width:90px; flex-shrink:0;">
-        <div style="font-size:11px; color:#64748b; margin-bottom:2px;">確認中</div>
-        <div id="stat-cust-confirm" style="font-size:22px; font-weight:700; color:#60a5fa;">0</div>
-      </div>
-      <div style="background:#1e2336; border:1px solid #2a2f45; border-radius:10px; padding:10px 16px; min-width:90px; flex-shrink:0;">
-        <div style="font-size:11px; color:#64748b; margin-bottom:2px;">已簽訂</div>
-        <div id="stat-cust-signed" style="font-size:22px; font-weight:700; color:#34d399;">0</div>
-      </div>
+    <div class="stats-row">
+      <div class="stat-card"><div style="font-size:11px;color:var(--text-s);margin-bottom:2px;">總筆數</div><div id="sc-total" style="font-size:22px;font-weight:700;color:var(--text-h);">0</div></div>
+      <div class="stat-card"><div style="font-size:11px;color:var(--text-s);margin-bottom:2px;">詢價中</div><div id="sc-inquiry" style="font-size:22px;font-weight:700;color:var(--amber);">0</div></div>
+      <div class="stat-card"><div style="font-size:11px;color:var(--text-s);margin-bottom:2px;">確認中</div><div id="sc-confirm" style="font-size:22px;font-weight:700;color:var(--accent);">0</div></div>
+      <div class="stat-card"><div style="font-size:11px;color:var(--text-s);margin-bottom:2px;">已簽訂</div><div id="sc-signed" style="font-size:22px;font-weight:700;color:var(--green);">0</div></div>
     </div>
-    <!-- Records -->
     <div id="cust-records"></div>
   </div>
 
-  <!-- ENGINEER TAB -->
+  <!-- ENGINEER -->
   <div id="tab-engineer" style="display:none;">
-    <div class="flex gap-2 mb-4">
-      <div class="relative flex-1">
-        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2" style="color:#475569; font-size:13px;"></i>
-        <input id="eng-search" class="input-field" style="padding-left:34px;"
-          placeholder="搜尋主題、工程師、指示、關鍵字..."
-          oninput="filterEngineer()" />
+    <div style="display:flex;gap:8px;margin-bottom:12px;">
+      <div style="flex:1;position:relative;">
+        <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text-s);font-size:13px;pointer-events:none;"></i>
+        <input id="eng-search" class="input-field" style="padding-left:34px;" placeholder="搜尋主題、工程師、指示、任何關鍵字..." oninput="filterEngineer()" />
       </div>
-      <select id="eng-status-filter" class="input-field" style="width:auto; min-width:90px;" onchange="filterEngineer()">
+      <select id="eng-status-filter" class="input-field" style="width:auto;min-width:88px;" onchange="filterEngineer()">
         <option value="">全部狀態</option>
         <option value="待處理">待處理</option>
         <option value="進行中">進行中</option>
         <option value="完成">完成</option>
       </select>
     </div>
-    <!-- Stats -->
-    <div class="flex gap-3 mb-4 overflow-x-auto pb-1">
-      <div style="background:#1e2336; border:1px solid #2a2f45; border-radius:10px; padding:10px 16px; min-width:90px; flex-shrink:0;">
-        <div style="font-size:11px; color:#64748b; margin-bottom:2px;">總任務</div>
-        <div id="stat-eng-total" style="font-size:22px; font-weight:700; color:#e2e8f0;">0</div>
-      </div>
-      <div style="background:#1e2336; border:1px solid #2a2f45; border-radius:10px; padding:10px 16px; min-width:90px; flex-shrink:0;">
-        <div style="font-size:11px; color:#64748b; margin-bottom:2px;">待處理</div>
-        <div id="stat-eng-pending" style="font-size:22px; font-weight:700; color:#94a3b8;">0</div>
-      </div>
-      <div style="background:#1e2336; border:1px solid #2a2f45; border-radius:10px; padding:10px 16px; min-width:90px; flex-shrink:0;">
-        <div style="font-size:11px; color:#64748b; margin-bottom:2px;">進行中</div>
-        <div id="stat-eng-ongoing" style="font-size:22px; font-weight:700; color:#fbbf24;">0</div>
-      </div>
-      <div style="background:#1e2336; border:1px solid #2a2f45; border-radius:10px; padding:10px 16px; min-width:90px; flex-shrink:0;">
-        <div style="font-size:11px; color:#64748b; margin-bottom:2px;">完成</div>
-        <div id="stat-eng-done" style="font-size:22px; font-weight:700; color:#34d399;">0</div>
-      </div>
+    <div class="stats-row">
+      <div class="stat-card"><div style="font-size:11px;color:var(--text-s);margin-bottom:2px;">總任務</div><div id="se-total" style="font-size:22px;font-weight:700;color:var(--text-h);">0</div></div>
+      <div class="stat-card"><div style="font-size:11px;color:var(--text-s);margin-bottom:2px;">待處理</div><div id="se-pending" style="font-size:22px;font-weight:700;color:var(--text-m);">0</div></div>
+      <div class="stat-card"><div style="font-size:11px;color:var(--text-s);margin-bottom:2px;">進行中</div><div id="se-ongoing" style="font-size:22px;font-weight:700;color:var(--amber);">0</div></div>
+      <div class="stat-card"><div style="font-size:11px;color:var(--text-s);margin-bottom:2px;">完成</div><div id="se-done" style="font-size:22px;font-weight:700;color:var(--green);">0</div></div>
     </div>
     <div id="eng-records"></div>
   </div>
@@ -288,140 +230,77 @@ tailwind.config = {
 <!-- IMPORT MODAL -->
 <div id="import-modal" class="modal-overlay" style="display:none;" onclick="handleOverlayClick(event)">
   <div class="modal-box slide-in">
-    <div class="flex items-center justify-between mb-5">
-      <div style="font-size:16px; font-weight:700; color:#e2e8f0;">
-        <i class="fa-solid fa-file-import mr-2" style="color:#3b82f6;"></i>匯入微信訊息
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+      <div style="font-size:16px;font-weight:700;color:var(--text-h);">
+        <i class="fa-solid fa-file-import" style="color:var(--accent);margin-right:8px;"></i>匯入微信訊息
       </div>
-      <button onclick="closeImport()" class="btn-ghost" style="padding:4px 10px; font-size:13px;">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+      <button onclick="closeImport()" class="btn-ghost" style="padding:5px 10px;"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
-    <!-- Type selector -->
-    <div style="font-size:12px; color:#64748b; margin-bottom:8px;">訊息類型</div>
-    <div class="flex gap-2 mb-4">
-      <button class="type-btn active" id="type-customer-btn" onclick="setMsgType('customer')">
-        <i class="fa-solid fa-users mr-1"></i>客戶訊息
-      </button>
-      <button class="type-btn" id="type-engineer-btn" onclick="setMsgType('engineer')">
-        <i class="fa-solid fa-screwdriver-wrench mr-1"></i>工程師任務
-      </button>
+    <div style="font-size:12px;color:var(--text-m);margin-bottom:7px;">訊息類型</div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
+      <button class="type-btn active" id="type-customer-btn" onclick="setMsgType('customer')"><i class="fa-solid fa-users" style="margin-right:4px;"></i>客戶訊息</button>
+      <button class="type-btn" id="type-engineer-btn" onclick="setMsgType('engineer')"><i class="fa-solid fa-screwdriver-wrench" style="margin-right:4px;"></i>工程師任務</button>
     </div>
 
-    <!-- Manual fields toggle -->
-    <div class="flex items-center gap-2 mb-3">
-      <div style="flex:1; height:1px; background:#2a2f45;"></div>
-      <span style="font-size:11px; color:#475569;">方式一：AI 自動解析</span>
-      <div style="flex:1; height:1px; background:#2a2f45;"></div>
-    </div>
+    <div class="divider"><span>方式一：貼入聊天記錄，AI 自動解析</span></div>
 
-    <textarea id="paste-input" class="input-field mb-3"
-      style="height:130px; resize:none; font-size:13px; line-height:1.7;"
-      placeholder="直接貼入微信聊天記錄（可含時間戳）&#10;&#10;例：&#10;王大明 2024/6/10 14:32&#10;TM四向光A3 500pcs 報價NT$85 交期6/30&#10;&#10;AI 會自動拆解欄位"></textarea>
+    <textarea id="paste-input" class="input-field" style="height:140px;margin-bottom:10px;font-size:13px;" placeholder="直接貼入整段微信聊天記錄（可含時間戳、多段對話）&#10;&#10;例如：&#10;王大明  10:32&#10;重庆方正有2台TM4，询单2周了，交期一直没给出来&#10;客户希望交期9、10内提供&#10;&#10;我  10:45&#10;好，我確認後回覆你"></textarea>
 
-    <div class="flex justify-end gap-2 mb-4">
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:14px;">
       <button class="btn-ghost" onclick="document.getElementById('paste-input').value=''">清空</button>
-      <button class="btn-primary" onclick="parseMessage()" id="parse-btn">
+      <button class="btn-primary" id="parse-btn" onclick="parseMessage()">
         <i class="fa-solid fa-wand-magic-sparkles"></i> AI 解析並儲存
       </button>
     </div>
 
-    <div id="parse-result" style="display:none;"></div>
+    <div id="parse-result" style="display:none;margin-bottom:14px;"></div>
 
-    <div class="flex items-center gap-2 my-4">
-      <div style="flex:1; height:1px; background:#2a2f45;"></div>
-      <span style="font-size:11px; color:#475569;">方式二：手動輸入</span>
-      <div style="flex:1; height:1px; background:#2a2f45;"></div>
+    <!-- Worker URL -->
+    <div id="worker-hint" style="background:var(--accent-bg);border:1px solid #b8d4f4;border-radius:8px;padding:10px 12px;margin-bottom:16px;font-size:12px;color:var(--accent);display:flex;gap:8px;align-items:flex-start;">
+      <i class="fa-solid fa-circle-info" style="margin-top:1px;flex-shrink:0;"></i>
+      <div style="width:100%;">
+        AI 解析需設定 Cloudflare Worker 網址。請填入你的 Worker URL：
+        <div style="margin-top:6px;display:flex;gap:6px;">
+          <input id="worker-url-input" class="input-field" style="flex:1;font-size:12px;padding:6px 10px;" placeholder="https://your-worker.workers.dev" />
+          <button class="btn-primary" style="padding:6px 12px;font-size:12px;" onclick="saveWorkerUrl()">儲存</button>
+        </div>
+      </div>
     </div>
 
-    <!-- Customer manual form -->
+    <div class="divider"><span>方式二：手動輸入</span></div>
+
+    <!-- Customer form -->
     <div id="manual-customer-form">
-      <div class="grid grid-cols-2 gap-3 mb-3">
-        <div>
-          <div style="font-size:12px; color:#64748b; margin-bottom:5px;">客戶公司 <span style="color:#f87171;">*</span></div>
-          <input id="m-company" class="input-field" placeholder="例：華通" />
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">客戶公司 <span style="color:var(--red);">*</span></div><input id="m-company" class="input-field" placeholder="例：華通" /></div>
+        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">聯絡人 <span style="color:var(--red);">*</span></div><input id="m-contact" class="input-field" placeholder="例：王大明" /></div>
+        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">機型</div><input id="m-model" class="input-field" placeholder="例：TM四向光 A3" /></div>
+        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">數量</div><input id="m-qty" class="input-field" type="number" placeholder="例：500" /></div>
+        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">價格</div><input id="m-price" class="input-field" placeholder="例：NT$85/pcs" /></div>
+        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">交期</div><input id="m-delivery" class="input-field" placeholder="例：6/30" /></div>
+        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">日期</div><input id="m-date" class="input-field" type="date" /></div>
+        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">狀態</div>
+          <select id="m-status" class="input-field"><option value="詢價中">詢價中</option><option value="確認中">確認中</option><option value="已簽訂">已簽訂</option></select>
         </div>
-        <div>
-          <div style="font-size:12px; color:#64748b; margin-bottom:5px;">聯絡人 <span style="color:#f87171;">*</span></div>
-          <input id="m-contact" class="input-field" placeholder="例：王大明" />
-        </div>
-        <div>
-          <div style="font-size:12px; color:#64748b; margin-bottom:5px;">機型</div>
-          <input id="m-model" class="input-field" placeholder="例：TM四向光 A3" />
-        </div>
-        <div>
-          <div style="font-size:12px; color:#64748b; margin-bottom:5px;">數量</div>
-          <input id="m-qty" class="input-field" placeholder="例：500" type="number" />
-        </div>
-        <div>
-          <div style="font-size:12px; color:#64748b; margin-bottom:5px;">價格</div>
-          <input id="m-price" class="input-field" placeholder="例：NT$85/pcs" />
-        </div>
-        <div>
-          <div style="font-size:12px; color:#64748b; margin-bottom:5px;">交期</div>
-          <input id="m-delivery" class="input-field" placeholder="例：6/30" />
-        </div>
-        <div>
-          <div style="font-size:12px; color:#64748b; margin-bottom:5px;">日期</div>
-          <input id="m-date" class="input-field" type="date" />
-        </div>
-        <div>
-          <div style="font-size:12px; color:#64748b; margin-bottom:5px;">狀態</div>
-          <select id="m-status" class="input-field">
-            <option value="詢價中">詢價中</option>
-            <option value="確認中">確認中</option>
-            <option value="已簽訂">已簽訂</option>
-          </select>
-        </div>
+        <div style="grid-column:1/-1;"><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">備註</div><textarea id="m-note" class="input-field" style="height:56px;" placeholder="其他備註..."></textarea></div>
       </div>
-      <div>
-        <div style="font-size:12px; color:#64748b; margin-bottom:5px;">備註</div>
-        <textarea id="m-note" class="input-field mb-3" style="height:60px; resize:none;" placeholder="其他備註..."></textarea>
-      </div>
-      <div class="flex justify-end">
-        <button class="btn-primary" onclick="manualSaveCustomer()">
-          <i class="fa-solid fa-floppy-disk"></i> 儲存
-        </button>
-      </div>
+      <div style="display:flex;justify-content:flex-end;"><button class="btn-primary" onclick="manualSaveCustomer()"><i class="fa-solid fa-floppy-disk"></i> 儲存</button></div>
     </div>
 
-    <!-- Engineer manual form -->
+    <!-- Engineer form -->
     <div id="manual-engineer-form" style="display:none;">
-      <div class="grid grid-cols-2 gap-3 mb-3">
-        <div class="col-span-2">
-          <div style="font-size:12px; color:#64748b; margin-bottom:5px;">主題 <span style="color:#f87171;">*</span></div>
-          <input id="e-topic" class="input-field" placeholder="例：TM四向光 — 光衰測試" />
-        </div>
-        <div>
-          <div style="font-size:12px; color:#64748b; margin-bottom:5px;">工程師 <span style="color:#f87171;">*</span></div>
-          <input id="e-engineer" class="input-field" placeholder="例：陳工" />
-        </div>
-        <div>
-          <div style="font-size:12px; color:#64748b; margin-bottom:5px;">日期</div>
-          <input id="e-date" class="input-field" type="date" />
-        </div>
-        <div class="col-span-2">
-          <div style="font-size:12px; color:#64748b; margin-bottom:5px;">指示內容</div>
-          <textarea id="e-instruction" class="input-field" style="height:60px; resize:none;" placeholder="給工程師的指示..."></textarea>
-        </div>
-        <div class="col-span-2">
-          <div style="font-size:12px; color:#64748b; margin-bottom:5px;">回報進度</div>
-          <textarea id="e-progress" class="input-field" style="height:60px; resize:none;" placeholder="工程師回報內容..."></textarea>
-        </div>
-        <div>
-          <div style="font-size:12px; color:#64748b; margin-bottom:5px;">狀態</div>
-          <select id="e-status" class="input-field">
-            <option value="待處理">待處理</option>
-            <option value="進行中">進行中</option>
-            <option value="完成">完成</option>
-          </select>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+        <div style="grid-column:1/-1;"><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">主題 <span style="color:var(--red);">*</span></div><input id="e-topic" class="input-field" placeholder="例：TM四向光 — 光衰測試" /></div>
+        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">工程師 <span style="color:var(--red);">*</span></div><input id="e-engineer" class="input-field" placeholder="例：陳工" /></div>
+        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">日期</div><input id="e-date" class="input-field" type="date" /></div>
+        <div style="grid-column:1/-1;"><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">指示內容</div><textarea id="e-instruction" class="input-field" style="height:60px;" placeholder="給工程師的指示..."></textarea></div>
+        <div style="grid-column:1/-1;"><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">回報進度</div><textarea id="e-progress" class="input-field" style="height:60px;" placeholder="工程師回報內容..."></textarea></div>
+        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">狀態</div>
+          <select id="e-status" class="input-field"><option value="待處理">待處理</option><option value="進行中">進行中</option><option value="完成">完成</option></select>
         </div>
       </div>
-      <div class="flex justify-end">
-        <button class="btn-primary" onclick="manualSaveEngineer()">
-          <i class="fa-solid fa-floppy-disk"></i> 儲存
-        </button>
-      </div>
+      <div style="display:flex;justify-content:flex-end;"><button class="btn-primary" onclick="manualSaveEngineer()"><i class="fa-solid fa-floppy-disk"></i> 儲存</button></div>
     </div>
   </div>
 </div>
@@ -432,378 +311,294 @@ tailwind.config = {
 </div>
 
 <script>
-// ─── DATA ────────────────────────────────────────────────────────────────────
+var WORKER_URL = localStorage.getItem('workerUrl') || '';
+
+function saveWorkerUrl(){
+  var v = document.getElementById('worker-url-input').value.trim().replace(/\/$/,'');
+  if(!v) return;
+  WORKER_URL = v;
+  localStorage.setItem('workerUrl', v);
+  document.getElementById('worker-hint').style.background='#d4f0e2';
+  document.getElementById('worker-hint').style.borderColor='#a0d8b8';
+  document.getElementById('worker-hint').innerHTML=
+    '<i class="fa-solid fa-circle-check" style="color:#1a7a4a;flex-shrink:0;"></i>'
+    +'<span style="color:#1a7a4a;font-size:12px;">Worker 已設定：'+v
+    +'&nbsp;<button onclick="resetWorkerUrl()" style="background:none;border:none;color:var(--text-m);font-size:12px;cursor:pointer;text-decoration:underline;">重設</button></span>';
+}
+function resetWorkerUrl(){ WORKER_URL=''; localStorage.removeItem('workerUrl'); location.reload(); }
+
 var custData = [
-  { id:1, company:'華通', contact:'王大明', date:'2024-06-10', model:'TM四向光 A3', qty:500, price:'NT$85/pcs', delivery:'6/30', status:'確認中', note:'', raw:'王大明 10:32\nTM四向光A3 500pcs NT$85 交期6/30', tags:['四向光','報價'] },
-  { id:2, company:'光電科技', contact:'林美華', date:'2024-06-08', model:'LED模組 B型', qty:1200, price:'NT$42/pcs', delivery:'7/15', status:'已簽訂', note:'客戶要求加速', raw:'林美華 09:15\nLED模組B型 1200pcs 42元 7/15到貨', tags:['LED','量產'] },
-  { id:3, company:'鉅亞電子', contact:'張勝利', date:'2024-06-05', model:'TM雙向燈板', qty:200, price:'NT$120/pcs', delivery:'未定', status:'詢價中', note:'', raw:'張勝利 16:48\n雙向燈板200片 先報價 交期待確定', tags:['詢價'] },
+  {id:1,company:'華通',contact:'王大明',date:'2024-06-10',model:'TM四向光 A3',qty:500,price:'NT$85/pcs',delivery:'6/30',status:'確認中',note:'',raw:'王大明  10:32\nTM四向光A3 500pcs 報價NT$85 交期6/30\n\n我  10:45\n好，確認後回覆',tags:['四向光','報價','A3']},
+  {id:2,company:'光電科技',contact:'林美華',date:'2024-06-08',model:'LED模組 B型',qty:1200,price:'NT$42/pcs',delivery:'7/15',status:'已簽訂',note:'客戶要求加速出貨',raw:'林美華  09:15\nLED模組B型 1200pcs 42元 7/15前一定要到',tags:['LED','量產','B型']},
+  {id:3,company:'鉅亞電子',contact:'張勝利',date:'2024-06-05',model:'TM雙向燈板',qty:200,price:'NT$120/pcs',delivery:'未定',status:'詢價中',note:'',raw:'張勝利  16:48\n雙向燈板200片 先給我報價 交期還沒確定',tags:['詢價','雙向']},
+  {id:4,company:'重慶方正',contact:'劉建國',date:'2024-06-03',model:'TM4',qty:2,price:'—',delivery:'9月底前',status:'詢價中',note:'詢單2周仍未給交期',raw:'劉建國  14:20\n重庆方正有2台TM4，询单2周了，交期一直没给出来\n客户希望交期9、10内提供',tags:['TM4','催單','交期']},
 ];
 var engData = [
-  { id:1, topic:'TM四向光 — 光衰測試', engineer:'陳工', date:'2024-06-10', instruction:'請重新測量光衰曲線，高溫85°C條件下', progress:'已完成初測，數據明天出', status:'進行中', tags:['光衰','測試'] },
-  { id:2, topic:'模組組裝 — 良率改善', engineer:'林工 / 黃工', date:'2024-06-09', instruction:'第三道焊接工序溫度調降5°，觀察一周良率', progress:'良率從92%提升至95.8%', status:'完成', tags:['良率','焊接'] },
-  { id:3, topic:'B型外殼 — 尺寸公差確認', engineer:'吳工', date:'2024-06-07', instruction:'與供應商確認外殼公差±0.2mm可接受', progress:'尚未回報', status:'待處理', tags:['公差','外殼'] },
+  {id:1,topic:'TM四向光 — 光衰測試',engineer:'陳工',date:'2024-06-10',instruction:'請重新測量光衰曲線，尤其是高溫85°C條件下的數據',progress:'已完成初測，完整數據明天提供',status:'進行中',tags:['光衰','高溫測試']},
+  {id:2,topic:'模組組裝 — 良率改善',engineer:'林工 / 黃工',date:'2024-06-09',instruction:'第三道焊接工序溫度調降5°，觀察一周良率變化',progress:'良率從92%提升至95.8%，持續監控',status:'完成',tags:['良率','焊接']},
+  {id:3,topic:'B型外殼 — 尺寸公差確認',engineer:'吳工',date:'2024-06-07',instruction:'與供應商確認外殼公差±0.2mm是否可接受，取得書面確認',progress:'尚未回報',status:'待處理',tags:['公差','外殼','供應商']},
 ];
-var currentTab = 'customer';
-var currentMsgType = 'customer';
+var currentTab='customer';
+var currentMsgType='customer';
 
-// ─── TAB ─────────────────────────────────────────────────────────────────────
-function switchTab(tab) {
-  currentTab = tab;
-  document.getElementById('tab-customer').style.display  = tab==='customer'  ? '' : 'none';
-  document.getElementById('tab-engineer').style.display  = tab==='engineer'  ? '' : 'none';
-  var custBtn = document.getElementById('tab-cust-btn');
-  var engBtn  = document.getElementById('tab-eng-btn');
-  if (tab==='customer') {
-    custBtn.classList.add('tab-active'); custBtn.style.color='#3b82f6'; custBtn.style.borderColor='#3b82f6';
-    engBtn.classList.remove('tab-active'); engBtn.style.color='#64748b'; engBtn.style.borderColor='transparent';
-    renderCustomer(custData);
-  } else {
-    engBtn.classList.add('tab-active'); engBtn.style.color='#3b82f6'; engBtn.style.borderColor='#3b82f6';
-    custBtn.classList.remove('tab-active'); custBtn.style.color='#64748b'; custBtn.style.borderColor='transparent';
-    renderEngineer(engData);
-  }
+window.onload=function(){
+  var today=new Date().toISOString().split('T')[0];
+  document.getElementById('m-date').value=today;
+  document.getElementById('e-date').value=today;
+  if(WORKER_URL) saveWorkerUrl();
+  renderCustomer(custData);
+};
+
+function switchTab(tab){
+  currentTab=tab;
+  document.getElementById('tab-customer').style.display=tab==='customer'?'':'none';
+  document.getElementById('tab-engineer').style.display=tab==='engineer'?'':'none';
+  var cb=document.getElementById('tab-cust-btn');
+  var eb=document.getElementById('tab-eng-btn');
+  cb.classList.toggle('active',tab==='customer');
+  eb.classList.toggle('active',tab==='engineer');
+  if(tab==='customer') renderCustomer(custData);
+  else renderEngineer(engData);
 }
 
-// ─── HIGHLIGHT ───────────────────────────────────────────────────────────────
-function hl(text, q) {
-  if (!q || !text) return text || '';
-  var escaped = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-  return String(text).replace(new RegExp('('+escaped+')','gi'),'<mark>$1</mark>');
+function hl(text,q){
+  if(!q||!text) return String(text||'');
+  return String(text).replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark>$1</mark>');
 }
+function escH(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-// ─── CUSTOMER RENDER ─────────────────────────────────────────────────────────
-function renderCustomer(data) {
-  var q  = (document.getElementById('cust-search')||{}).value||'';
-  var cf = (document.getElementById('cust-company-filter')||{}).value||'';
-  var filtered = data.filter(function(r) {
-    if (cf && r.company !== cf) return false;
-    if (!q) return true;
-    var hay = [r.company, r.contact, r.model, r.price, r.delivery, r.status, r.note, r.raw].concat(r.tags||[]).join(' ').toLowerCase();
-    return hay.indexOf(q.toLowerCase()) > -1;
+function renderCustomer(data){
+  var q=(document.getElementById('cust-search')||{}).value||'';
+  var cf=(document.getElementById('cust-company-filter')||{}).value||'';
+  var companies=[];
+  data.forEach(function(r){if(companies.indexOf(r.company)<0) companies.push(r.company);});
+  var sel=document.getElementById('cust-company-filter');
+  if(sel){var cur=sel.value;sel.innerHTML='<option value="">全部客戶</option>'+companies.map(function(c){return '<option value="'+escH(c)+'"'+(c===cur?' selected':'')+'>'+escH(c)+'</option>';}).join('');}
+  var filtered=data.filter(function(r){
+    if(cf&&r.company!==cf) return false;
+    if(!q) return true;
+    return [r.company,r.contact,r.model,r.price,r.delivery,r.status,r.note,r.raw].concat(r.tags||[]).join(' ').toLowerCase().indexOf(q.toLowerCase())>-1;
   });
-  // Update company dropdown
-  var companies = [...new Set(data.map(function(r){return r.company;}))];
-  var sel = document.getElementById('cust-company-filter');
-  if (sel) {
-    var cur = sel.value;
-    sel.innerHTML = '<option value="">全部客戶</option>' + companies.map(function(c){
-      return '<option value="'+c+'"'+(c===cur?' selected':'')+'>'+c+'</option>';
-    }).join('');
-  }
-  // Stats
-  document.getElementById('stat-cust-total').textContent = data.length;
-  document.getElementById('stat-cust-inquiry').textContent = data.filter(function(r){return r.status==='詢價中';}).length;
-  document.getElementById('stat-cust-confirm').textContent = data.filter(function(r){return r.status==='確認中';}).length;
-  document.getElementById('stat-cust-signed').textContent  = data.filter(function(r){return r.status==='已簽訂';}).length;
-
-  var statusClass = { '詢價中':'badge-amber','確認中':'badge-blue','已簽訂':'badge-green' };
-  var el = document.getElementById('cust-records');
-  if (!filtered.length) {
-    el.innerHTML = '<div class="empty-state"><i class="fa-solid fa-inbox" style="font-size:32px; margin-bottom:12px; display:block;"></i>查無符合紀錄</div>';
-    return;
-  }
-  el.innerHTML = filtered.map(function(r) {
-    return '<div class="card-hover mb-3 cursor-pointer" onclick="showCustDetail('+r.id+')" style="background:#1e2336; border:1px solid #2a2f45; border-radius:12px; padding:14px 16px;">'
-      // Header: company + contact
-      +'<div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">'
-        +'<div>'
-          +'<div style="font-size:15px; font-weight:700; color:#e2e8f0; margin-bottom:2px;">'
-            +'<i class="fa-solid fa-building" style="color:#3b82f6; font-size:12px; margin-right:5px;"></i>'
-            +hl(r.company, q)
-            +'<span style="color:#475569; font-size:13px; font-weight:400;"> / </span>'
-            +'<i class="fa-solid fa-user" style="color:#94a3b8; font-size:11px; margin-right:4px;"></i>'
-            +'<span style="font-size:14px; font-weight:500; color:#cbd5e1;">'+hl(r.contact,q)+'</span>'
+  document.getElementById('sc-total').textContent=data.length;
+  document.getElementById('sc-inquiry').textContent=data.filter(function(r){return r.status==='詢價中';}).length;
+  document.getElementById('sc-confirm').textContent=data.filter(function(r){return r.status==='確認中';}).length;
+  document.getElementById('sc-signed').textContent=data.filter(function(r){return r.status==='已簽訂';}).length;
+  var scls={'詢價中':'badge-amber','確認中':'badge-blue','已簽訂':'badge-green'};
+  var el=document.getElementById('cust-records');
+  if(!filtered.length){el.innerHTML='<div class="empty-state"><i class="fa-solid fa-inbox" style="font-size:36px;display:block;margin-bottom:12px;"></i>查無符合紀錄</div>';return;}
+  el.innerHTML=filtered.map(function(r){
+    return '<div class="msg-card" onclick="showCustDetail('+r.id+')">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">'
+        +'<div style="flex:1;min-width:0;">'
+          +'<div style="display:flex;align-items:baseline;gap:5px;flex-wrap:wrap;">'
+            +'<span style="font-size:15px;font-weight:700;color:var(--text-h);"><i class="fa-regular fa-building" style="color:var(--accent);font-size:12px;margin-right:4px;"></i>'+hl(r.company,q)+'</span>'
+            +'<span style="color:var(--border2);font-size:13px;">/</span>'
+            +'<span style="font-size:14px;font-weight:500;color:var(--text-m);"><i class="fa-regular fa-user" style="font-size:11px;margin-right:3px;"></i>'+hl(r.contact,q)+'</span>'
           +'</div>'
-          +'<div style="font-size:13px; color:#94a3b8; margin-top:2px;">'
-            +'<i class="fa-solid fa-microchip" style="font-size:11px; margin-right:4px;"></i>'+hl(r.model||'—',q)
-          +'</div>'
+          +'<div style="font-size:13px;color:var(--text-s);margin-top:2px;"><i class="fa-solid fa-microchip" style="font-size:10px;margin-right:4px;"></i>'+hl(r.model||'—',q)+'</div>'
         +'</div>'
-        +'<div style="text-align:right;">'
-          +'<div class="badge '+( statusClass[r.status]||'badge-gray' )+'">'+r.status+'</div>'
-          +'<div style="font-size:11px; color:#475569; margin-top:4px;">'+r.date+'</div>'
+        +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;">'
+          +'<span class="badge '+(scls[r.status]||'badge-gray')+'">'+escH(r.status)+'</span>'
+          +'<span style="font-size:11px;color:var(--text-s);">'+escH(r.date)+'</span>'
         +'</div>'
       +'</div>'
-      // Badges
-      +'<div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:8px;">'
-        +(r.qty ? '<span class="badge badge-gray"><i class="fa-solid fa-box fa-xs"></i> '+hl(String(r.qty),q)+' pcs</span>' : '')
-        +(r.price ? '<span class="badge badge-green"><i class="fa-solid fa-tag fa-xs"></i> '+hl(r.price,q)+'</span>' : '')
-        +(r.delivery ? '<span class="badge badge-amber"><i class="fa-solid fa-calendar fa-xs"></i> 交期 '+hl(r.delivery,q)+'</span>' : '')
+      +'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:9px;">'
+        +(r.qty?'<span class="badge badge-gray"><i class="fa-solid fa-box" style="font-size:9px;"></i> '+hl(String(r.qty),q)+' pcs</span>':'')
+        +(r.price&&r.price!=='—'?'<span class="badge badge-green"><i class="fa-solid fa-tag" style="font-size:9px;"></i> '+hl(r.price,q)+'</span>':'')
+        +(r.delivery&&r.delivery!=='—'?'<span class="badge badge-amber"><i class="fa-regular fa-calendar" style="font-size:9px;"></i> 交期 '+hl(r.delivery,q)+'</span>':'')
         +(r.tags||[]).map(function(t){return '<span class="badge badge-gray">'+hl(t,q)+'</span>';}).join('')
       +'</div>'
-      // Preview
-      +(r.raw ? '<div style="font-size:12px; color:#64748b; line-height:1.6; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">'+hl(r.raw,q)+'</div>' : '')
+      +(r.raw?'<div style="font-size:12px;color:var(--text-s);line-height:1.6;margin-top:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">'+hl(r.raw,q)+'</div>':'')
     +'</div>';
   }).join('');
 }
+function filterCustomer(){renderCustomer(custData);}
 
-function filterCustomer() { renderCustomer(custData); }
-
-// ─── ENGINEER RENDER ─────────────────────────────────────────────────────────
-function renderEngineer(data) {
-  var q  = (document.getElementById('eng-search')||{}).value||'';
-  var sf = (document.getElementById('eng-status-filter')||{}).value||'';
-  var filtered = data.filter(function(r) {
-    if (sf && r.status !== sf) return false;
-    if (!q) return true;
-    var hay = [r.topic, r.engineer, r.instruction, r.progress].concat(r.tags||[]).join(' ').toLowerCase();
-    return hay.indexOf(q.toLowerCase()) > -1;
+function renderEngineer(data){
+  var q=(document.getElementById('eng-search')||{}).value||'';
+  var sf=(document.getElementById('eng-status-filter')||{}).value||'';
+  var filtered=data.filter(function(r){
+    if(sf&&r.status!==sf) return false;
+    if(!q) return true;
+    return [r.topic,r.engineer,r.instruction,r.progress].concat(r.tags||[]).join(' ').toLowerCase().indexOf(q.toLowerCase())>-1;
   });
-  // Stats
-  document.getElementById('stat-eng-total').textContent   = data.length;
-  document.getElementById('stat-eng-pending').textContent = data.filter(function(r){return r.status==='待處理';}).length;
-  document.getElementById('stat-eng-ongoing').textContent = data.filter(function(r){return r.status==='進行中';}).length;
-  document.getElementById('stat-eng-done').textContent    = data.filter(function(r){return r.status==='完成';}).length;
-
-  var statusCls = { '待處理':'badge-gray','進行中':'badge-amber','完成':'badge-teal' };
-  var dotCls    = { '待處理':'dot-gray','進行中':'dot-amber','完成':'dot-green' };
-  var el = document.getElementById('eng-records');
-  if (!filtered.length) {
-    el.innerHTML = '<div class="empty-state"><i class="fa-solid fa-inbox" style="font-size:32px; margin-bottom:12px; display:block;"></i>查無符合紀錄</div>';
-    return;
-  }
-  el.innerHTML = filtered.map(function(r) {
-    return '<div class="card-hover mb-3 cursor-pointer" onclick="showEngDetail('+r.id+')" style="background:#1e2336; border:1px solid #2a2f45; border-radius:12px; padding:14px 16px;">'
-      +'<div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">'
-        +'<div style="flex:1; margin-right:12px;">'
-          +'<div style="font-size:15px; font-weight:700; color:#e2e8f0; margin-bottom:3px;">'+hl(r.topic,q)+'</div>'
-          +'<div style="font-size:12px; color:#94a3b8;">'
-            +'<i class="fa-solid fa-user-gear fa-xs" style="margin-right:4px;"></i>'+hl(r.engineer,q)
-            +' <span style="color:#2a2f45;">·</span> '+r.date
-          +'</div>'
+  document.getElementById('se-total').textContent=data.length;
+  document.getElementById('se-pending').textContent=data.filter(function(r){return r.status==='待處理';}).length;
+  document.getElementById('se-ongoing').textContent=data.filter(function(r){return r.status==='進行中';}).length;
+  document.getElementById('se-done').textContent=data.filter(function(r){return r.status==='完成';}).length;
+  var scls={'待處理':'badge-gray','進行中':'badge-amber','完成':'badge-teal'};
+  var dcls={'待處理':'dot-gray','進行中':'dot-amber','完成':'dot-green'};
+  var el=document.getElementById('eng-records');
+  if(!filtered.length){el.innerHTML='<div class="empty-state"><i class="fa-solid fa-inbox" style="font-size:36px;display:block;margin-bottom:12px;"></i>查無符合紀錄</div>';return;}
+  el.innerHTML=filtered.map(function(r){
+    return '<div class="msg-card" onclick="showEngDetail('+r.id+')">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">'
+        +'<div style="flex:1;min-width:0;">'
+          +'<div style="font-size:15px;font-weight:700;color:var(--text-h);">'+hl(r.topic,q)+'</div>'
+          +'<div style="font-size:12px;color:var(--text-s);margin-top:3px;"><i class="fa-solid fa-user-gear" style="font-size:10px;margin-right:4px;"></i>'+hl(r.engineer,q)+' · '+escH(r.date)+'</div>'
         +'</div>'
-        +'<div class="badge '+( statusCls[r.status]||'badge-gray' )+'"><span class="status-dot '+(dotCls[r.status]||'dot-gray')+'"></span> '+r.status+'</div>'
+        +'<span class="badge '+(scls[r.status]||'badge-gray')+'" style="flex-shrink:0;"><span class="status-dot '+(dcls[r.status]||'dot-gray')+'" style="margin-right:3px;"></span>'+escH(r.status)+'</span>'
       +'</div>'
-      +'<div style="margin-bottom:8px;">'
-        +'<div style="font-size:11px; color:#475569; margin-bottom:3px; text-transform:uppercase; letter-spacing:0.5px;">指示</div>'
-        +'<div style="font-size:13px; color:#94a3b8; line-height:1.6; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">'+hl(r.instruction||'—',q)+'</div>'
+      +'<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">'
+        +'<div style="font-size:11px;color:var(--text-s);letter-spacing:0.5px;margin-bottom:3px;">指示</div>'
+        +'<div style="font-size:13px;color:var(--text-m);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">'+hl(r.instruction||'—',q)+'</div>'
       +'</div>'
-      +'<div style="padding-top:8px; border-top:1px solid #2a2f45;">'
-        +'<div style="font-size:11px; color:#475569; margin-bottom:3px; text-transform:uppercase; letter-spacing:0.5px;">最新回報</div>'
-        +'<div style="font-size:13px; color:#94a3b8; line-height:1.6; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">'+hl(r.progress||'尚未回報',q)+'</div>'
+      +'<div style="margin-top:8px;">'
+        +'<div style="font-size:11px;color:var(--text-s);letter-spacing:0.5px;margin-bottom:3px;">最新回報</div>'
+        +'<div style="font-size:13px;color:var(--text-m);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">'+hl(r.progress||'尚未回報',q)+'</div>'
       +'</div>'
-      +(r.tags&&r.tags.length ? '<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;">'+(r.tags||[]).map(function(t){return '<span class="badge badge-gray">'+hl(t,q)+'</span>';}).join('')+'</div>' : '')
+      +(r.tags&&r.tags.length?'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:9px;">'+(r.tags||[]).map(function(t){return '<span class="badge badge-gray">'+hl(t,q)+'</span>';}).join('')+'</div>':'')
     +'</div>';
   }).join('');
 }
+function filterEngineer(){renderEngineer(engData);}
 
-function filterEngineer() { renderEngineer(engData); }
-
-// ─── DETAIL MODALS ───────────────────────────────────────────────────────────
-function showCustDetail(id) {
-  var r = custData.find(function(x){return x.id===id;});
-  if (!r) return;
-  var statusCls = { '詢價中':'badge-amber','確認中':'badge-blue','已簽訂':'badge-green' };
-  document.getElementById('detail-content-box').innerHTML =
+function showCustDetail(id){
+  var r=custData.find(function(x){return x.id===id;});
+  if(!r) return;
+  var scls={'詢價中':'badge-amber','確認中':'badge-blue','已簽訂':'badge-green'};
+  document.getElementById('detail-content-box').innerHTML=
     '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;">'
       +'<div>'
-        +'<div style="font-size:11px; color:#475569; margin-bottom:5px; letter-spacing:1px; text-transform:uppercase;">客戶訊息</div>'
-        +'<div style="font-size:18px;font-weight:700;color:#e2e8f0;">'
-          +'<i class="fa-solid fa-building" style="color:#3b82f6; margin-right:6px;"></i>'+r.company
-        +'</div>'
-        +'<div style="font-size:14px;color:#94a3b8;margin-top:3px;">'
-          +'<i class="fa-solid fa-user" style="margin-right:5px;"></i>'+r.contact
-        +'</div>'
+        +'<div style="font-size:11px;color:var(--text-s);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">客戶訊息</div>'
+        +'<div style="font-size:19px;font-weight:700;color:var(--text-h);"><i class="fa-regular fa-building" style="color:var(--accent);margin-right:6px;font-size:15px;"></i>'+escH(r.company)+'</div>'
+        +'<div style="font-size:14px;color:var(--text-m);margin-top:4px;"><i class="fa-regular fa-user" style="margin-right:5px;font-size:12px;"></i>'+escH(r.contact)+'</div>'
       +'</div>'
-      +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">'
-        +'<span class="badge '+(statusCls[r.status]||'badge-gray')+'">'+r.status+'</span>'
-        +'<button onclick="closeDetail()" class="btn-ghost" style="padding:4px 10px;font-size:13px;"><i class="fa-solid fa-xmark"></i></button>'
+      +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:7px;">'
+        +'<span class="badge '+(scls[r.status]||'badge-gray')+'" style="font-size:12px;padding:4px 10px;">'+escH(r.status)+'</span>'
+        +'<button onclick="closeDetail()" class="btn-ghost" style="padding:5px 10px;"><i class="fa-solid fa-xmark"></i></button>'
       +'</div>'
     +'</div>'
-    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">'
-      +field('機型', r.model||'—', 'fa-microchip')
-      +field('數量', r.qty ? r.qty+' pcs' : '—', 'fa-box')
-      +field('價格', r.price||'—', 'fa-tag')
-      +field('交期', r.delivery||'—', 'fa-calendar')
-      +field('日期', r.date||'—', 'fa-calendar-days')
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">'
+      +fbox('機型','fa-microchip',r.model||'—')
+      +fbox('數量','fa-box',r.qty?r.qty+' pcs':'—')
+      +fbox('價格','fa-tag',r.price||'—')
+      +fbox('交期','fa-calendar',r.delivery||'—')
+      +fbox('日期','fa-calendar-days',r.date||'—')
     +'</div>'
-    +(r.note ? '<div style="margin-bottom:14px;"><div style="font-size:11px;color:#475569;margin-bottom:6px;letter-spacing:0.5px;">備註</div><div style="background:#0f1117;border-radius:8px;padding:10px;font-size:13px;color:#94a3b8;line-height:1.7;">'+r.note+'</div></div>' : '')
-    +'<div><div style="font-size:11px;color:#475569;margin-bottom:6px;letter-spacing:0.5px;">原始訊息</div><div style="background:#0f1117;border-radius:8px;padding:10px;font-size:13px;color:#94a3b8;line-height:1.7;white-space:pre-wrap;">'+r.raw+'</div></div>'
-    +(r.tags&&r.tags.length?'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:14px;">'+(r.tags||[]).map(function(t){return '<span class="badge badge-gray">'+t+'</span>';}).join('')+'</div>':'');
+    +(r.note?'<div style="margin-bottom:12px;"><div style="font-size:11px;color:var(--text-s);margin-bottom:5px;">備註</div><div class="raw-block">'+escH(r.note)+'</div></div>':'')
+    +'<div><div style="font-size:11px;color:var(--text-s);margin-bottom:5px;">原始訊息</div><div class="raw-block">'+escH(r.raw)+'</div></div>'
+    +(r.tags&&r.tags.length?'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:12px;">'+(r.tags||[]).map(function(t){return '<span class="badge badge-gray">'+escH(t)+'</span>';}).join('')+'</div>':'');
   document.getElementById('detail-modal').style.display='flex';
 }
 
-function showEngDetail(id) {
-  var r = engData.find(function(x){return x.id===id;});
-  if (!r) return;
-  var statusCls = { '待處理':'badge-gray','進行中':'badge-amber','完成':'badge-teal' };
-  document.getElementById('detail-content-box').innerHTML =
+function showEngDetail(id){
+  var r=engData.find(function(x){return x.id===id;});
+  if(!r) return;
+  var scls={'待處理':'badge-gray','進行中':'badge-amber','完成':'badge-teal'};
+  document.getElementById('detail-content-box').innerHTML=
     '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;">'
       +'<div style="flex:1;margin-right:12px;">'
-        +'<div style="font-size:11px; color:#475569; margin-bottom:5px; letter-spacing:1px; text-transform:uppercase;">工程師任務</div>'
-        +'<div style="font-size:17px;font-weight:700;color:#e2e8f0;">'+r.topic+'</div>'
-        +'<div style="font-size:13px;color:#94a3b8;margin-top:4px;">'
-          +'<i class="fa-solid fa-user-gear" style="margin-right:5px;"></i>'+r.engineer+' · '+r.date
-        +'</div>'
+        +'<div style="font-size:11px;color:var(--text-s);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">工程師任務</div>'
+        +'<div style="font-size:17px;font-weight:700;color:var(--text-h);">'+escH(r.topic)+'</div>'
+        +'<div style="font-size:13px;color:var(--text-m);margin-top:5px;"><i class="fa-solid fa-user-gear" style="margin-right:5px;font-size:11px;"></i>'+escH(r.engineer)+' · '+escH(r.date)+'</div>'
       +'</div>'
-      +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">'
-        +'<span class="badge '+(statusCls[r.status]||'badge-gray')+'">'+r.status+'</span>'
-        +'<button onclick="closeDetail()" class="btn-ghost" style="padding:4px 10px;font-size:13px;"><i class="fa-solid fa-xmark"></i></button>'
+      +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:7px;">'
+        +'<span class="badge '+(scls[r.status]||'badge-gray')+'" style="font-size:12px;padding:4px 10px;">'+escH(r.status)+'</span>'
+        +'<button onclick="closeDetail()" class="btn-ghost" style="padding:5px 10px;"><i class="fa-solid fa-xmark"></i></button>'
       +'</div>'
     +'</div>'
-    +'<div style="margin-bottom:14px;"><div style="font-size:11px;color:#475569;margin-bottom:6px;letter-spacing:0.5px;">指示內容</div><div style="background:#0f1117;border-radius:8px;padding:12px;font-size:13px;color:#94a3b8;line-height:1.8;white-space:pre-wrap;">'+r.instruction+'</div></div>'
-    +'<div><div style="font-size:11px;color:#475569;margin-bottom:6px;letter-spacing:0.5px;">最新回報</div><div style="background:#0f1117;border:1px solid #2a2f45;border-radius:8px;padding:12px;font-size:13px;color:#e2e8f0;line-height:1.8;white-space:pre-wrap;">'+( r.progress||'尚未回報' )+'</div></div>'
-    +(r.tags&&r.tags.length?'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:14px;">'+(r.tags||[]).map(function(t){return '<span class="badge badge-gray">'+t+'</span>';}).join('')+'</div>':'');
+    +'<div style="margin-bottom:12px;"><div style="font-size:11px;color:var(--text-s);margin-bottom:5px;">指示內容</div><div class="raw-block">'+escH(r.instruction||'—')+'</div></div>'
+    +'<div style="margin-bottom:12px;"><div style="font-size:11px;color:var(--text-s);margin-bottom:5px;">最新回報</div><div class="raw-block" style="border-color:var(--border2);color:var(--text-b);">'+escH(r.progress||'尚未回報')+'</div></div>'
+    +(r.tags&&r.tags.length?'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;">'+(r.tags||[]).map(function(t){return '<span class="badge badge-gray">'+escH(t)+'</span>';}).join('')+'</div>':'');
   document.getElementById('detail-modal').style.display='flex';
 }
 
-function field(label, value, icon) {
-  return '<div style="background:#0f1117;border-radius:8px;padding:10px 12px;">'
-    +'<div style="font-size:11px;color:#475569;margin-bottom:4px;"><i class="fa-solid '+icon+'" style="margin-right:4px;font-size:10px;"></i>'+label+'</div>'
-    +'<div style="font-size:14px;font-weight:600;color:#e2e8f0;">'+value+'</div>'
-  +'</div>';
+function fbox(label,icon,value){
+  return '<div class="field-box"><div class="field-label"><i class="fa-solid '+icon+'" style="font-size:10px;margin-right:3px;"></i>'+label+'</div><div class="field-value">'+escH(value)+'</div></div>';
 }
 
-function closeDetail() { document.getElementById('detail-modal').style.display='none'; }
-function handleDetailOverlay(e) { if(e.target===document.getElementById('detail-modal')) closeDetail(); }
+function closeDetail(){document.getElementById('detail-modal').style.display='none';}
+function handleDetailOverlay(e){if(e.target===document.getElementById('detail-modal')) closeDetail();}
 
-// ─── IMPORT MODAL ─────────────────────────────────────────────────────────────
-function openImport() {
+function openImport(){
   document.getElementById('import-modal').style.display='flex';
   document.getElementById('parse-result').style.display='none';
-  // default date
-  var today = new Date().toISOString().split('T')[0];
-  document.getElementById('m-date').value = today;
-  document.getElementById('e-date').value = today;
 }
-function closeImport() { document.getElementById('import-modal').style.display='none'; }
-function handleOverlayClick(e) { if(e.target===document.getElementById('import-modal')) closeImport(); }
+function closeImport(){document.getElementById('import-modal').style.display='none';}
+function handleOverlayClick(e){if(e.target===document.getElementById('import-modal')) closeImport();}
 
-function setMsgType(type) {
-  currentMsgType = type;
-  document.getElementById('type-customer-btn').classList.toggle('active', type==='customer');
-  document.getElementById('type-engineer-btn').classList.toggle('active', type==='engineer');
-  document.getElementById('manual-customer-form').style.display = type==='customer' ? '' : 'none';
-  document.getElementById('manual-engineer-form').style.display = type==='engineer' ? '' : 'none';
+function setMsgType(type){
+  currentMsgType=type;
+  document.getElementById('type-customer-btn').classList.toggle('active',type==='customer');
+  document.getElementById('type-engineer-btn').classList.toggle('active',type==='engineer');
+  document.getElementById('manual-customer-form').style.display=type==='customer'?'':'none';
+  document.getElementById('manual-engineer-form').style.display=type==='engineer'?'':'none';
 }
 
-// ─── AI PARSE ────────────────────────────────────────────────────────────────
-async function parseMessage() {
-  var text = document.getElementById('paste-input').value.trim();
-  if (!text) return;
-  var btn = document.getElementById('parse-btn');
-  var resultEl = document.getElementById('parse-result');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> 解析中...';
-  resultEl.style.display = 'block';
-  resultEl.innerHTML = '<div style="background:#1e2336;border:1px solid #2a2f45;border-radius:10px;padding:12px 14px;font-size:13px;color:#64748b;"><span class="spinner"></span> AI 正在解析訊息...</div>';
-
-  var isCustomer = currentMsgType === 'customer';
-  var systemPrompt = isCustomer
-    ? '你是訊息解析助理。從微信對話中提取以下欄位並以純JSON回傳（不含```code block```）：company(客戶公司名稱), contact(聯絡人姓名/對話者), date(日期格式YYYY-MM-DD，若無用今天), model(機型產品), qty(數量純數字或null), price(價格含單位或null), delivery(交期或null), status(詢價中/確認中/已簽訂 三選一), note(備註), raw(原始訊息完整文字), tags(標籤陣列 2-4個)。回傳純JSON。'
-    : '你是訊息解析助理。從微信對話中提取以下欄位並以純JSON回傳（不含```code block```）：topic(主題格式"產品 — 事項"), engineer(工程師名稱), date(日期格式YYYY-MM-DD，若無用今天), instruction(指示內容), progress(回報進度，若無則"尚未回報"), status(待處理/進行中/完成 三選一), tags(標籤陣列 2-4個)。回傳純JSON。';
-
-  try {
-    var resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{ 'Content-Type':'application/json' },
-      body: JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        system: systemPrompt,
-        messages:[{ role:'user', content: text }]
-      })
-    });
-    var data = await resp.json();
-    var raw = data.content.map(function(c){return c.text||'';}).join('');
-    var clean = raw.replace(/```json|```/g,'').trim();
-    var parsed = JSON.parse(clean);
-    parsed.id = Date.now();
-    if (!parsed.tags) parsed.tags = [];
-
-    if (isCustomer) {
-      if (!parsed.raw) parsed.raw = text;
+async function parseMessage(){
+  var text=document.getElementById('paste-input').value.trim();
+  if(!text){alert('請先貼入微信聊天記錄');return;}
+  if(!WORKER_URL){alert('請先填入 Cloudflare Worker 網址（匯入視窗藍色提示框）');return;}
+  var btn=document.getElementById('parse-btn');
+  var resultEl=document.getElementById('parse-result');
+  btn.disabled=true;
+  btn.innerHTML='<span class="spinner"></span> AI 解析中...';
+  resultEl.style.display='block';
+  resultEl.innerHTML='<div style="background:var(--accent-bg);border:1px solid #b8d4f4;border-radius:10px;padding:12px 14px;font-size:13px;color:var(--accent);display:flex;align-items:center;gap:8px;"><span class="spinner"></span> Claude 正在理解你的訊息，請稍候...</div>';
+  var isCustomer=currentMsgType==='customer';
+  var systemPrompt=isCustomer
+    ?'你是訊息解析助理。仔細閱讀以下微信聊天記錄，提取所有可識別的資訊，回傳純JSON（不含markdown）包含：company(客戶公司名稱，若不確定填null), contact(聯絡人/發話者姓名), date(最近日期YYYY-MM-DD，若無填今天), model(機型或產品名稱，若有), qty(數量純數字，若有), price(價格含單位，若有), delivery(交期描述，若有), status(詢價中/確認中/已簽訂 三選一，依語意判斷), note(重要備註), raw(原始訊息完整文字), tags(2至4個關鍵標籤陣列)。'
+    :'你是訊息解析助理。仔細閱讀以下微信聊天記錄，回傳純JSON（不含markdown）包含：topic(任務主題，格式"產品或系統 — 具體事項"), engineer(工程師或負責人名稱), date(最近日期YYYY-MM-DD，若無填今天), instruction(指示或要求內容), progress(回報或進度，若無填"尚未回報"), status(待處理/進行中/完成 三選一，依語意判斷), tags(2至4個關鍵標籤陣列)。';
+  try{
+    var resp=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1200,system:systemPrompt,messages:[{role:'user',content:text}]})});
+    var data=await resp.json();
+    if(data.error) throw new Error(data.error.message||JSON.stringify(data.error));
+    var raw=data.content.map(function(c){return c.text||'';}).join('');
+    var clean=raw.replace(/```json|```/g,'').trim();
+    var parsed=JSON.parse(clean);
+    parsed.id=Date.now();
+    if(!parsed.tags) parsed.tags=[];
+    if(isCustomer){
+      if(!parsed.raw) parsed.raw=text;
       custData.unshift(parsed);
-      resultEl.innerHTML =
-        '<div style="background:#0d2516;border:1px solid #166534;border-radius:10px;padding:12px 14px;">'
-        +'<div style="font-size:13px;font-weight:600;color:#34d399;margin-bottom:8px;"><i class="fa-solid fa-circle-check"></i> 解析成功，已加入客戶往來</div>'
-        +'<div style="display:flex;flex-wrap:wrap;gap:5px;">'
-          +(parsed.company?'<span class="badge badge-blue"><i class="fa-solid fa-building fa-xs"></i> '+parsed.company+'</span>':'')
-          +(parsed.contact?'<span class="badge badge-gray"><i class="fa-solid fa-user fa-xs"></i> '+parsed.contact+'</span>':'')
-          +(parsed.model?'<span class="badge badge-gray">'+parsed.model+'</span>':'')
-          +(parsed.qty?'<span class="badge badge-gray">'+parsed.qty+' pcs</span>':'')
-          +(parsed.price?'<span class="badge badge-green">'+parsed.price+'</span>':'')
-          +(parsed.delivery?'<span class="badge badge-amber">交期 '+parsed.delivery+'</span>':'')
-        +'</div>'
-        +'</div>';
+      resultEl.innerHTML='<div style="background:var(--green-bg);border:1px solid #a0d8b8;border-radius:10px;padding:12px 14px;"><div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px;"><i class="fa-solid fa-circle-check" style="margin-right:5px;"></i>解析成功，已加入「客戶往來」</div><div style="display:flex;flex-wrap:wrap;gap:5px;">'
+        +(parsed.company?'<span class="badge badge-blue">'+escH(parsed.company)+'</span>':'')
+        +(parsed.contact?'<span class="badge badge-gray">'+escH(parsed.contact)+'</span>':'')
+        +(parsed.model?'<span class="badge badge-gray">'+escH(parsed.model)+'</span>':'')
+        +(parsed.qty?'<span class="badge badge-gray">'+parsed.qty+' pcs</span>':'')
+        +(parsed.price?'<span class="badge badge-green">'+escH(parsed.price)+'</span>':'')
+        +(parsed.delivery?'<span class="badge badge-amber">交期 '+escH(parsed.delivery)+'</span>':'')
+        +'</div></div>';
       document.getElementById('paste-input').value='';
-      if (currentTab==='customer') renderCustomer(custData);
+      if(currentTab==='customer') renderCustomer(custData);
     } else {
       engData.unshift(parsed);
-      resultEl.innerHTML =
-        '<div style="background:#0d2516;border:1px solid #166534;border-radius:10px;padding:12px 14px;">'
-        +'<div style="font-size:13px;font-weight:600;color:#34d399;margin-bottom:8px;"><i class="fa-solid fa-circle-check"></i> 解析成功，已加入工程師任務</div>'
-        +'<div style="display:flex;flex-wrap:wrap;gap:5px;">'
-          +(parsed.topic?'<span class="badge badge-blue">'+parsed.topic+'</span>':'')
-          +(parsed.engineer?'<span class="badge badge-gray"><i class="fa-solid fa-user-gear fa-xs"></i> '+parsed.engineer+'</span>':'')
-          +(parsed.status?'<span class="badge badge-amber">'+parsed.status+'</span>':'')
-        +'</div>'
-        +'</div>';
+      resultEl.innerHTML='<div style="background:var(--green-bg);border:1px solid #a0d8b8;border-radius:10px;padding:12px 14px;"><div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px;"><i class="fa-solid fa-circle-check" style="margin-right:5px;"></i>解析成功，已加入「工程師任務」</div><div style="display:flex;flex-wrap:wrap;gap:5px;">'
+        +(parsed.topic?'<span class="badge badge-blue">'+escH(parsed.topic)+'</span>':'')
+        +(parsed.engineer?'<span class="badge badge-gray">'+escH(parsed.engineer)+'</span>':'')
+        +(parsed.status?'<span class="badge badge-amber">'+escH(parsed.status)+'</span>':'')
+        +'</div></div>';
       document.getElementById('paste-input').value='';
-      if (currentTab==='engineer') renderEngineer(engData);
+      if(currentTab==='engineer') renderEngineer(engData);
     }
-  } catch(err) {
-    resultEl.innerHTML =
-      '<div style="background:#2d1010;border:1px solid #7f1d1d;border-radius:10px;padding:12px 14px;font-size:13px;color:#f87171;">'
-      +'<i class="fa-solid fa-circle-exclamation"></i> 解析失敗：'+err.message+'<br><span style="color:#64748b;font-size:12px;">請確認 Claude API Key 已設定，或改用手動輸入方式</span>'
-      +'</div>';
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> AI 解析並儲存';
+  }catch(err){
+    resultEl.innerHTML='<div style="background:var(--red-bg);border:1px solid #f0b8b8;border-radius:10px;padding:12px 14px;font-size:13px;color:var(--red);"><i class="fa-solid fa-circle-exclamation" style="margin-right:6px;"></i>解析失敗：'+escH(err.message)+'<div style="color:var(--text-s);font-size:12px;margin-top:4px;">請確認 Worker 網址是否正確，或改用下方手動輸入方式。</div></div>';
+  }finally{
+    btn.disabled=false;
+    btn.innerHTML='<i class="fa-solid fa-wand-magic-sparkles"></i> AI 解析並儲存';
   }
 }
 
-// ─── MANUAL SAVE ─────────────────────────────────────────────────────────────
-function manualSaveCustomer() {
-  var company = document.getElementById('m-company').value.trim();
-  var contact = document.getElementById('m-contact').value.trim();
-  if (!company || !contact) { alert('請填入客戶公司與聯絡人'); return; }
-  var r = {
-    id: Date.now(),
-    company: company,
-    contact: contact,
-    date: document.getElementById('m-date').value,
-    model: document.getElementById('m-model').value.trim(),
-    qty: parseInt(document.getElementById('m-qty').value)||null,
-    price: document.getElementById('m-price').value.trim(),
-    delivery: document.getElementById('m-delivery').value.trim(),
-    status: document.getElementById('m-status').value,
-    note: document.getElementById('m-note').value.trim(),
-    raw: '',
-    tags: []
-  };
-  custData.unshift(r);
-  if (currentTab==='customer') renderCustomer(custData);
-  // Clear
-  ['m-company','m-contact','m-model','m-qty','m-price','m-delivery','m-note'].forEach(function(id){
-    document.getElementById(id).value='';
-  });
+function manualSaveCustomer(){
+  var company=document.getElementById('m-company').value.trim();
+  var contact=document.getElementById('m-contact').value.trim();
+  if(!company||!contact){alert('請填入客戶公司與聯絡人');return;}
+  custData.unshift({id:Date.now(),company:company,contact:contact,date:document.getElementById('m-date').value,model:document.getElementById('m-model').value.trim(),qty:parseInt(document.getElementById('m-qty').value)||null,price:document.getElementById('m-price').value.trim(),delivery:document.getElementById('m-delivery').value.trim(),status:document.getElementById('m-status').value,note:document.getElementById('m-note').value.trim(),raw:'',tags:[]});
+  if(currentTab==='customer') renderCustomer(custData);
+  ['m-company','m-contact','m-model','m-qty','m-price','m-delivery','m-note'].forEach(function(id){document.getElementById(id).value='';});
   closeImport();
 }
-
-function manualSaveEngineer() {
-  var topic = document.getElementById('e-topic').value.trim();
-  var engineer = document.getElementById('e-engineer').value.trim();
-  if (!topic || !engineer) { alert('請填入主題與工程師'); return; }
-  var r = {
-    id: Date.now(),
-    topic: topic,
-    engineer: engineer,
-    date: document.getElementById('e-date').value,
-    instruction: document.getElementById('e-instruction').value.trim(),
-    progress: document.getElementById('e-progress').value.trim()||'尚未回報',
-    status: document.getElementById('e-status').value,
-    tags: []
-  };
-  engData.unshift(r);
-  if (currentTab==='engineer') renderEngineer(engData);
-  ['e-topic','e-engineer','e-instruction','e-progress'].forEach(function(id){
-    document.getElementById(id).value='';
-  });
+function manualSaveEngineer(){
+  var topic=document.getElementById('e-topic').value.trim();
+  var engineer=document.getElementById('e-engineer').value.trim();
+  if(!topic||!engineer){alert('請填入主題與工程師');return;}
+  engData.unshift({id:Date.now(),topic:topic,engineer:engineer,date:document.getElementById('e-date').value,instruction:document.getElementById('e-instruction').value.trim(),progress:document.getElementById('e-progress').value.trim()||'尚未回報',status:document.getElementById('e-status').value,tags:[]});
+  if(currentTab==='engineer') renderEngineer(engData);
+  ['e-topic','e-engineer','e-instruction','e-progress'].forEach(function(id){document.getElementById(id).value='';});
   closeImport();
 }
-
-// ─── INIT ────────────────────────────────────────────────────────────────────
-renderCustomer(custData);
 </script>
 </body>
 </html>
+
