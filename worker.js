@@ -1,12 +1,13 @@
 // ╔══════════════════════════════════════════════════════════════╗
-// ║  微信訊息管理系統 — Cloudflare Worker (Claude API Proxy)    ║
+// ║  微信訊息管理系統 — Cloudflare Worker (Gemini API Proxy)    ║
+// ║                                                              ║
 // ║  部署說明：                                                  ║
 // ║  1. 登入 https://dash.cloudflare.com                        ║
-// ║  2. 左側選 Workers & Pages → Create Worker                  ║
-// ║  3. 把這整份內容貼進去，點 Deploy                           ║
-// ║  4. 進 Settings → Variables → 新增 CLAUDE_API_KEY           ║
-// ║     填入你的 Anthropic API Key (sk-ant-...)                  ║
-// ║  5. 複製你的 Worker 網址，填入 HTML 的 WORKER_URL           ║
+// ║  2. 進入你的 Worker (withered-sound-43b8)                   ║
+// ║  3. 點「Edit Code」，清空原本程式碼，貼入這份               ║
+// ║  4. 點「Save and Deploy」                                    ║
+// ║  5. 進 Settings → Variables and Secrets → 新增：            ║
+// ║     GEMINI_API_KEY = 你的 Gemini API Key (AIza...)          ║
 // ╚══════════════════════════════════════════════════════════════╝
 
 export default {
@@ -14,69 +15,84 @@ export default {
 
     // ── CORS preflight ──────────────────────────────────────────
     if (request.method === 'OPTIONS') {
-      return new Response(null, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
-        },
-      });
+      return new Response(null, { headers: corsHeaders() });
     }
 
-    // ── 只接受 POST ─────────────────────────────────────────────
     if (request.method !== 'POST') {
       return new Response(JSON.stringify({ error: 'Method not allowed' }), {
-        status: 405,
-        headers: corsHeaders(),
+        status: 405, headers: corsHeaders()
       });
     }
 
-    // ── 取得 API Key（從 Worker 環境變數）──────────────────────
-    const apiKey = env.CLAUDE_API_KEY;
+    const apiKey = env.GEMINI_API_KEY;
     if (!apiKey) {
-      return new Response(JSON.stringify({ error: 'CLAUDE_API_KEY not set in Worker environment variables' }), {
-        status: 500,
-        headers: corsHeaders(),
+      return new Response(JSON.stringify({ error: 'GEMINI_API_KEY not set in Worker environment variables' }), {
+        status: 500, headers: corsHeaders()
       });
     }
 
-    // ── 解析前端送來的 body ──────────────────────────────────────
     let body;
     try {
       body = await request.json();
     } catch (e) {
       return new Response(JSON.stringify({ error: 'Invalid JSON body' }), {
-        status: 400,
-        headers: corsHeaders(),
+        status: 400, headers: corsHeaders()
       });
     }
 
-    // ── 轉發給 Claude API ────────────────────────────────────────
+    // ── 從前端格式轉成 Gemini 格式 ─────────────────────────────
+    // 前端送來的格式：{ system, messages: [{role, content}] }
+    const systemPrompt = body.system || '';
+    const userMsg = (body.messages || []).find(m => m.role === 'user');
+    const userText = userMsg ? userMsg.content : '';
+
+    const geminiBody = {
+      contents: [
+        {
+          role: 'user',
+          parts: [{ text: systemPrompt + '\n\n---\n\n' + userText }]
+        }
+      ],
+      generationConfig: {
+        temperature: 0.2,
+        maxOutputTokens: 1200,
+      }
+    };
+
     try {
-      const claudeResp = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-        },
-        body: JSON.stringify(body),
-      });
+      const geminiResp = await fetch(
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + apiKey,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(geminiBody)
+        }
+      );
 
-      const data = await claudeResp.json();
+      const geminiData = await geminiResp.json();
 
-      return new Response(JSON.stringify(data), {
-        status: claudeResp.status,
-        headers: corsHeaders(),
+      if (!geminiResp.ok) {
+        return new Response(JSON.stringify({ error: geminiData }), {
+          status: geminiResp.status, headers: corsHeaders()
+        });
+      }
+
+      // ── 把 Gemini 回應轉成前端期望的 Claude 格式 ───────────
+      const text = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      const converted = {
+        content: [{ type: 'text', text: text }]
+      };
+
+      return new Response(JSON.stringify(converted), {
+        status: 200, headers: corsHeaders()
       });
 
     } catch (e) {
-      return new Response(JSON.stringify({ error: 'Claude API call failed: ' + e.message }), {
-        status: 500,
-        headers: corsHeaders(),
+      return new Response(JSON.stringify({ error: 'Gemini API call failed: ' + e.message }), {
+        status: 500, headers: corsHeaders()
       });
     }
-  },
+  }
 };
 
 function corsHeaders() {
@@ -87,3 +103,4 @@ function corsHeaders() {
     'Access-Control-Allow-Headers': 'Content-Type',
   };
 }
+
