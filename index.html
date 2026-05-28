@@ -614,9 +614,13 @@ function renderUnified(){
             +'</div>'
             // 最新兩週進度
             +'<div style="margin-top:8px;padding-top:6px;border-top:1px solid var(--border);">'
-              +(latestWeek&&latestStatus?'<div style="font-size:11px;color:var(--text-s);margin-bottom:3px;">'+escH(latestWeek)+'</div>':'')
-              +(latestStatus?'<div style="font-size:13px;color:var(--text-b);font-weight:500;margin-bottom:4px;">'+hl(latestStatus,q)+'</div>':'<div style="font-size:12px;color:var(--text-s);margin-bottom:4px;">（無進度記錄）</div>')
-              +(prevStatus&&prevWeek?'<div style="font-size:11px;color:var(--text-s);">'+escH(prevWeek)+'：'+hl(prevStatus,q)+'</div>':'')
+              // 展開按鈕
+              +'<button onclick="toggleExpand(this)" style="font-size:11px;color:var(--accent);background:none;border:none;cursor:pointer;padding:0;margin-bottom:6px;"><i class="fa-solid fa-chevron-down" style="margin-right:3px;font-size:10px;"></i> 展開完整訊息</button>'
+              +'<div class="expand-content" style="display:none;">'
+                +(latestWeek&&latestStatus?'<div style="font-size:11px;color:var(--text-s);margin-bottom:3px;">'+escH(latestWeek)+'</div>':'')
+                +(latestStatus?'<div style="font-size:13px;color:var(--text-b);font-weight:500;margin-bottom:4px;">'+hl(latestStatus,q)+'</div>':'<div style="font-size:12px;color:var(--text-s);margin-bottom:4px;">（無進度記錄）</div>')
+                +(prevStatus&&prevWeek?'<div style="font-size:11px;color:var(--text-s);padding-top:4px;border-top:1px solid var(--border);">'+escH(prevWeek)+'：'+hl(prevStatus,q)+'</div>':'')
+              +'</div>'
             +'</div>'
           +'</div>';
         }
@@ -1108,17 +1112,23 @@ function debounceStats(){
 }
 
 function toggleExpand(btn){
-  var wrapper=btn.parentNode;
-  var content=wrapper.querySelector('.expand-content');
+  // 找緊接在按鈕後面的 .expand-content
+  var content=btn.nextElementSibling;
+  if(!content||!content.classList.contains('expand-content')){
+    // 備用：在父層找
+    content=btn.parentNode.querySelector('.expand-content');
+  }
   var icon=btn.querySelector('i');
   if(!content) return;
   var isOpen=content.style.display!=='none';
   content.style.display=isOpen?'none':'block';
-  icon.className=isOpen?'fa-solid fa-chevron-down':'fa-solid fa-chevron-up';
+  if(icon) icon.className=isOpen?'fa-solid fa-chevron-down':'fa-solid fa-chevron-up';
   // 更新按鈕文字
-  var spans=btn.childNodes;
-  for(var i=0;i<spans.length;i++){
-    if(spans[i].nodeType===3){spans[i].textContent=isOpen?' 展開完整訊息':' 收起';break;}
+  var nodes=btn.childNodes;
+  for(var i=0;i<nodes.length;i++){
+    if(nodes[i].nodeType===3&&nodes[i].textContent.trim()){
+      nodes[i].textContent=isOpen?' 展開完整訊息':' 收起';break;
+    }
   }
 }
 function closeDetail(){document.getElementById('detail-modal').style.display='none';}
