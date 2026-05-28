@@ -214,7 +214,11 @@ mark{background:#ffe085;color:#5a3e00;border-radius:2px;padding:0 2px;}
   <!-- ══ 需求統計 ══ -->
   <div id="tab-stats" style="display:none;">
     <div class="filter-panel">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+        <div>
+          <div class="filter-label"><i class="fa-regular fa-building" style="margin-right:3px;"></i>客戶公司</div>
+          <input id="f-stat-company" class="filter-input" placeholder="例：龍南、無錫..." oninput="debounceStats()" />
+        </div>
         <div>
           <div class="filter-label"><i class="fa-solid fa-microchip" style="margin-right:3px;"></i>機型</div>
           <input id="f-stat-model" class="filter-input" placeholder="例：RU6HM、DG6ZM..." oninput="debounceStats()" />
@@ -663,24 +667,27 @@ async function deleteCRMRecord(id){
 
 // ══ 需求統計 ════════════════════════════════════════════════
 function renderStats(){
+  var company=(document.getElementById('f-stat-company')||{}).value||'';
   var model=(document.getElementById('f-stat-model')||{}).value||'';
   var month=(document.getElementById('f-stat-month')||{}).value||'';
   var el=document.getElementById('stats-records');
   if(!el) return;
 
-  if(!model&&!month){
-    el.innerHTML='<div class="empty-state"><i class="fa-solid fa-chart-bar" style="font-size:36px;display:block;margin-bottom:12px;"></i>請輸入機型或月份進行統計</div>';
+  if(!company&&!model&&!month){
+    el.innerHTML='<div class="empty-state"><i class="fa-solid fa-chart-bar" style="font-size:36px;display:block;margin-bottom:12px;"></i>請輸入客戶、機型或月份進行統計</div>';
     return;
   }
 
   // 合併所有資料篩選
   var allRecords=[];
   custData.forEach(function(r){
+    if(company&&!matchQ(r.company||'',company)) return;
     if(model&&!matchQ(r.model||'',model)) return;
     if(month&&!matchQ(r.delivery||'',month)) return;
     allRecords.push({_type:'wechat',company:r.company,model:r.model,qty:parseInt(r.qty)||0,delivery:r.delivery,statusText:r.status,contact:r.contact,date:r.date,raw:r.raw,id:r.id});
   });
   crmData.forEach(function(r){
+    if(company&&!matchQ(r.customer||'',company)) return;
     if(model&&!matchQ(r.model||'',model)) return;
     if(month&&!matchQ(r.delivery||'',month)) return;
     var latestStatus=r.status_w2||r.status_w1||'';
@@ -1105,7 +1112,6 @@ function closeDetail(){document.getElementById('detail-modal').style.display='no
 </script>
 </body>
 </html>
-
 
 
 
