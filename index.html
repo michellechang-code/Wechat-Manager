@@ -9,20 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
 <style>
 * { font-family: 'Noto Sans TC', sans-serif; box-sizing: border-box; }
-
-/* ── 護眼色盤（暖灰米白系） ── */
 :root {
-  --bg:       #f0ede8;   /* 頁面底色：暖米灰 */
-  --surface:  #e8e4de;   /* header/tab底色 */
-  --card:     #faf8f5;   /* 卡片白 */
-  --border:   #d4cfc8;   /* 邊框：暖灰 */
-  --border2:  #c8c2bb;   /* 深一點邊框 */
-  --accent:   #3b76d4;   /* 藍色accent */
-  --accent-bg:#deeaf8;   /* 藍色淡背景 */
-  --text-h:   #1a1a1a;   /* 標題文字 */
-  --text-b:   #3d3d3d;   /* 內文文字 */
-  --text-m:   #7a7570;   /* 次要文字 */
-  --text-s:   #a09990;   /* 更淺文字 */
+  --bg:       #f0ede8;
+  --surface:  #e8e4de;
+  --card:     #faf8f5;
+  --border:   #d4cfc8;
+  --border2:  #c8c2bb;
+  --accent:   #3b76d4;
+  --accent-bg:#deeaf8;
+  --text-h:   #1a1a1a;
+  --text-b:   #3d3d3d;
+  --text-m:   #7a7570;
+  --text-s:   #a09990;
   --green:    #1a7a4a;
   --green-bg: #d4f0e2;
   --amber:    #8a5a00;
@@ -32,14 +30,10 @@
   --red:      #b03030;
   --red-bg:   #fde0e0;
 }
-
 body { background: var(--bg); color: var(--text-b); min-height: 100vh; }
-
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-
-/* badges */
 .badge { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:500; padding:2px 8px; border-radius:9999px; }
 .badge-blue  { background:var(--accent-bg); color:var(--accent); }
 .badge-green { background:var(--green-bg);  color:var(--green); }
@@ -47,89 +41,62 @@ body { background: var(--bg); color: var(--text-b); min-height: 100vh; }
 .badge-gray  { background:#e8e4de; color:#5a5550; border:1px solid var(--border); }
 .badge-teal  { background:var(--teal-bg);   color:var(--teal); }
 .badge-red   { background:var(--red-bg);    color:var(--red); }
-
 .status-dot { width:6px; height:6px; border-radius:50%; display:inline-block; }
 .dot-green { background:var(--green); }
 .dot-amber { background:#c07800; }
 .dot-gray  { background:var(--text-s); }
-
-/* inputs */
 .input-field {
-  background: var(--card);
-  border: 1px solid var(--border);
-  color: var(--text-b);
-  border-radius: 8px;
-  padding: 8px 12px;
-  font-size: 14px;
-  width: 100%;
-  outline: none;
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--text-b); border-radius: 8px; padding: 8px 12px;
+  font-size: 14px; width: 100%; outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .input-field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,118,212,0.1); }
 .input-field::placeholder { color: var(--text-s); }
 select.input-field option { background: var(--card); color: var(--text-b); }
 textarea.input-field { resize: none; line-height: 1.7; }
-
-/* buttons */
+.filter-input {
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--text-b); border-radius: 8px; padding: 7px 10px;
+  font-size: 13px; width: 100%; outline: none;
+  transition: border-color 0.2s;
+}
+.filter-input:focus { border-color: var(--accent); }
+.filter-input::placeholder { color: var(--text-s); }
+.filter-label { font-size:11px; color:var(--text-m); margin-bottom:4px; font-weight:500; letter-spacing:0.3px; }
 .btn-primary {
-  background: var(--accent); color: #fff;
-  border: none; border-radius: 8px;
-  padding: 9px 18px; font-size: 14px; font-weight: 500;
-  cursor: pointer;
+  background: var(--accent); color: #fff; border: none; border-radius: 8px;
+  padding: 9px 18px; font-size: 14px; font-weight: 500; cursor: pointer;
   transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
   display: inline-flex; align-items: center; gap: 6px;
 }
 .btn-primary:hover  { background: #2a62c0; box-shadow: 0 2px 10px rgba(59,118,212,0.25); }
 .btn-primary:active { transform: scale(0.97); }
 .btn-primary:disabled { opacity:0.5; cursor:not-allowed; }
-
 .btn-ghost {
-  background: transparent; color: var(--text-m);
-  border: 1px solid var(--border); border-radius: 8px;
-  padding: 7px 14px; font-size: 13px; cursor: pointer;
+  background: transparent; color: var(--text-m); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 14px; font-size: 13px; cursor: pointer;
   transition: background 0.2s, color 0.2s;
 }
 .btn-ghost:hover { background: var(--border); color: var(--text-b); }
-
 .type-btn {
   padding: 5px 14px; font-size: 12px; border-radius: 20px;
   border: 1px solid var(--border); background: transparent;
   color: var(--text-m); cursor: pointer; transition: all 0.2s;
 }
 .type-btn.active { background: var(--accent-bg); color: var(--accent); border-color: var(--accent); }
-
-/* cards */
 .msg-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 14px 16px;
-  margin-bottom: 10px;
-  cursor: pointer;
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 14px 16px; margin-bottom: 10px;
   transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
 }
-.msg-card:hover {
-  border-color: var(--accent);
-  box-shadow: 0 2px 14px rgba(59,118,212,0.10);
-  transform: translateY(-1px);
-}
-
-/* nav */
+.msg-card:hover { border-color: var(--accent); box-shadow: 0 2px 14px rgba(59,118,212,0.10); transform: translateY(-1px); }
 .top-nav { background: var(--surface); border-bottom: 1px solid var(--border2); position:sticky; top:0; z-index:50; }
 .tab-bar  { background: var(--surface); border-bottom: 1px solid var(--border2); position:sticky; top:57px; z-index:40; }
-
-/* tab active */
 .tab-btn { padding:12px 20px; font-size:14px; font-weight:500; border:none; border-bottom:2px solid transparent; background:transparent; cursor:pointer; color:var(--text-m); transition: color 0.2s; }
 .tab-btn.active { color:var(--accent); border-bottom-color:var(--accent); }
-
-/* stats */
-.stat-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:10px 16px; min-width:86px; flex-shrink:0; }
-
-/* modal */
 .modal-overlay { position:fixed; inset:0; background:rgba(80,70,60,0.45); backdrop-filter:blur(2px); z-index:200; display:flex; align-items:center; justify-content:center; padding:16px; }
 .modal-box { background:var(--card); border:1px solid var(--border2); border-radius:16px; padding:24px; width:100%; max-width:580px; max-height:88vh; overflow-y:auto; box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
-
-/* misc */
 mark { background:#ffe085; color:#5a3e00; border-radius:2px; padding:0 2px; }
 .raw-block { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:12px; font-size:13px; color:var(--text-m); line-height:1.75; white-space:pre-wrap; word-break:break-all; }
 .field-box  { background:var(--bg); border-radius:8px; padding:10px 12px; }
@@ -139,95 +106,196 @@ mark { background:#ffe085; color:#5a3e00; border-radius:2px; padding:0 2px; }
 .divider { display:flex; align-items:center; gap:8px; margin:14px 0 12px; }
 .divider span { font-size:11px; color:var(--text-s); white-space:nowrap; }
 .divider::before,.divider::after { content:''; flex:1; height:1px; background:var(--border); }
-.stats-row { display:flex; gap:10px; overflow-x:auto; padding-bottom:4px; margin-bottom:14px; }
-
+.filter-panel { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px 16px; margin-bottom:14px; }
+.stats-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:4px; }
+.stat-pill { background:var(--bg); border:1px solid var(--border); border-radius:20px; padding:4px 12px; font-size:12px; color:var(--text-m); white-space:nowrap; }
+.stat-pill b { font-weight:700; }
 .spinner { width:16px; height:16px; border:2px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin 0.7s linear infinite; display:inline-block; vertical-align:middle; }
 @keyframes spin { to { transform:rotate(360deg); } }
 .slide-in { animation:slideIn 0.22s ease; }
 @keyframes slideIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+.del-btn { background:none; border:none; cursor:pointer; color:var(--text-s); padding:3px 5px; border-radius:4px; font-size:12px; transition: color 0.15s; }
+.del-btn:hover { color:var(--red); }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <header class="top-nav">
-  <div style="max-width:780px;margin:0 auto;padding:0 16px;height:57px;display:flex;align-items:center;justify-content:space-between;">
+  <div style="max-width:820px;margin:0 auto;padding:0 16px;height:57px;display:flex;align-items:center;justify-content:space-between;">
     <div style="display:flex;align-items:center;gap:10px;">
       <div style="background:var(--accent-bg);border-radius:8px;padding:7px 10px;">
         <i class="fa-brands fa-weixin" style="color:var(--accent);font-size:17px;"></i>
       </div>
       <div>
-        <div style="font-size:15px;font-weight:700;color:var(--text-h);letter-spacing:0.3px;">訊息管理系統</div>
+        <div style="font-size:15px;font-weight:700;color:var(--text-h);">訊息管理系統</div>
         <div style="font-size:11px;color:var(--text-s);">微信訊息 · 智能整理</div>
       </div>
     </div>
-    <button class="btn-ghost" style="font-size:13px;padding:7px 14px;display:flex;align-items:center;gap:6px;" onclick="openImport()">
-      <i class="fa-solid fa-plus" style="font-size:11px;"></i> 匯入訊息
-    </button>
+    <div style="display:flex;gap:8px;">
+      <button class="btn-ghost" style="font-size:13px;padding:7px 14px;display:flex;align-items:center;gap:6px;" onclick="openImport()">
+        <i class="fa-solid fa-plus" style="font-size:11px;"></i> 匯入訊息
+      </button>
+    </div>
   </div>
 </header>
 
 <!-- TABS -->
 <div class="tab-bar">
-  <div style="max-width:780px;margin:0 auto;padding:0 16px;display:flex;">
+  <div style="max-width:820px;margin:0 auto;padding:0 16px;display:flex;">
     <button id="tab-cust-btn" class="tab-btn active" onclick="switchTab('customer')">
-      <i class="fa-solid fa-users" style="margin-right:5px;font-size:13px;"></i>客戶往來
+      <i class="fa-solid fa-handshake" style="margin-right:5px;font-size:13px;"></i>客戶商務
     </button>
     <button id="tab-eng-btn" class="tab-btn" onclick="switchTab('engineer')">
-      <i class="fa-solid fa-screwdriver-wrench" style="margin-right:5px;font-size:13px;"></i>工程師任務
+      <i class="fa-solid fa-gears" style="margin-right:5px;font-size:13px;"></i>設備／技術
     </button>
   </div>
 </div>
 
-<!-- MAIN -->
-<main style="max-width:780px;margin:0 auto;padding:16px;">
+<main style="max-width:820px;margin:0 auto;padding:16px;">
 
-  <!-- CUSTOMER -->
+  <!-- ══ 客戶商務訊息 ══ -->
   <div id="tab-customer">
-    <div style="display:flex;gap:8px;margin-bottom:12px;">
-      <div style="flex:1;position:relative;">
-        <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text-s);font-size:13px;pointer-events:none;"></i>
-        <input id="cust-search" class="input-field" style="padding-left:34px;" placeholder="搜尋公司、聯絡人、機型、任何關鍵字..." oninput="filterCustomer()" />
+    <!-- 統計小標籤 -->
+    <div class="stats-row" id="cust-stats-row" style="margin-bottom:12px;"></div>
+    <!-- 多欄位篩選 -->
+    <div class="filter-panel">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div>
+          <div class="filter-label"><i class="fa-regular fa-building" style="margin-right:3px;"></i>客戶公司</div>
+          <select id="f-cust-company" class="filter-input" onchange="filterCustomer()">
+            <option value="">全部</option>
+          </select>
+        </div>
+        <div>
+          <div class="filter-label"><i class="fa-solid fa-microchip" style="margin-right:3px;"></i>機型</div>
+          <input id="f-cust-model" class="filter-input" placeholder="例：TM4、CCD..." oninput="filterCustomer()" />
+        </div>
+        <div>
+          <div class="filter-label"><i class="fa-regular fa-calendar" style="margin-right:3px;"></i>交期</div>
+          <input id="f-cust-delivery" class="filter-input" placeholder="例：6月、2024/9..." oninput="filterCustomer()" />
+        </div>
+        <div>
+          <div class="filter-label"><i class="fa-solid fa-tag" style="margin-right:3px;"></i>價格／幣別</div>
+          <input id="f-cust-price" class="filter-input" placeholder="例：85、USD、RMB..." oninput="filterCustomer()" />
+        </div>
       </div>
-      <select id="cust-company-filter" class="input-field" style="width:auto;min-width:96px;" onchange="filterCustomer()">
-        <option value="">全部客戶</option>
-      </select>
-    </div>
-    <div class="stats-row">
-      <div class="stat-card"><div style="font-size:11px;color:var(--text-s);margin-bottom:2px;">總筆數</div><div id="sc-total" style="font-size:22px;font-weight:700;color:var(--text-h);">0</div></div>
-      <div class="stat-card"><div style="font-size:11px;color:var(--text-s);margin-bottom:2px;">詢價中</div><div id="sc-inquiry" style="font-size:22px;font-weight:700;color:var(--amber);">0</div></div>
-      <div class="stat-card"><div style="font-size:11px;color:var(--text-s);margin-bottom:2px;">確認中</div><div id="sc-confirm" style="font-size:22px;font-weight:700;color:var(--accent);">0</div></div>
-      <div class="stat-card"><div style="font-size:11px;color:var(--text-s);margin-bottom:2px;">已簽訂</div><div id="sc-signed" style="font-size:22px;font-weight:700;color:var(--green);">0</div></div>
+      <div style="margin-top:10px;position:relative;">
+        <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-s);font-size:13px;pointer-events:none;"></i>
+        <input id="f-cust-keyword" class="filter-input" style="padding-left:32px;" placeholder="全文關鍵字搜尋（任何內容）..." oninput="filterCustomer()" />
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:8px;">
+        <button class="btn-ghost" style="font-size:12px;padding:5px 12px;" onclick="clearCustFilter()">
+          <i class="fa-solid fa-rotate-left" style="font-size:11px;margin-right:3px;"></i>清除篩選
+        </button>
+      </div>
     </div>
     <div id="cust-records"></div>
-  </div>
 
-  <!-- ENGINEER -->
-  <div id="tab-engineer" style="display:none;">
-    <div style="display:flex;gap:8px;margin-bottom:12px;">
-      <div style="flex:1;position:relative;">
-        <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text-s);font-size:13px;pointer-events:none;"></i>
-        <input id="eng-search" class="input-field" style="padding-left:34px;" placeholder="搜尋主題、工程師、指示、任何關鍵字..." oninput="filterEngineer()" />
+    <!-- ══ CRM 銷售排程（合併在客戶商務頁） ══ -->
+    <div style="margin-top:28px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="background:var(--green-bg);border-radius:8px;padding:6px 9px;">
+            <i class="fa-solid fa-table" style="color:var(--green);font-size:14px;"></i>
+          </div>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:var(--text-h);">CRM 銷售排程</div>
+            <div style="font-size:11px;color:var(--text-s);">從 Excel 匯入的銷售資料</div>
+          </div>
+        </div>
+        <button class="btn-ghost" style="font-size:12px;padding:6px 12px;display:flex;align-items:center;gap:5px;" onclick="openExcelImport()">
+          <i class="fa-solid fa-file-excel" style="font-size:11px;color:#1a7a4a;"></i> 匯入 Excel
+        </button>
       </div>
-      <select id="eng-status-filter" class="input-field" style="width:auto;min-width:88px;" onchange="filterEngineer()">
-        <option value="">全部狀態</option>
-        <option value="待處理">待處理</option>
-        <option value="進行中">進行中</option>
-        <option value="完成">完成</option>
-      </select>
+      <div class="stats-row" id="crm-stats-row" style="margin-bottom:12px;"></div>
+      <div class="filter-panel">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+          <div>
+            <div class="filter-label"><i class="fa-solid fa-user-tie" style="margin-right:3px;"></i>承辦業務</div>
+            <select id="f-crm-sales" class="filter-input" onchange="filterCRM()">
+              <option value="">全部</option>
+            </select>
+          </div>
+          <div>
+            <div class="filter-label"><i class="fa-regular fa-building" style="margin-right:3px;"></i>客戶</div>
+            <input id="f-crm-customer" class="filter-input" placeholder="例：慶鼎、滬士..." oninput="filterCRM()" />
+          </div>
+          <div>
+            <div class="filter-label"><i class="fa-solid fa-microchip" style="margin-right:3px;"></i>機種／機型</div>
+            <input id="f-crm-model" class="filter-input" placeholder="例：RU6GM、TM3..." oninput="filterCRM()" />
+          </div>
+          <div>
+            <div class="filter-label"><i class="fa-regular fa-calendar" style="margin-right:3px;"></i>需求時間</div>
+            <input id="f-crm-delivery" class="filter-input" placeholder="例：2026/6、Q3..." oninput="filterCRM()" />
+          </div>
+          <div>
+            <div class="filter-label"><i class="fa-solid fa-circle-dot" style="margin-right:3px;"></i>進度狀態</div>
+            <input id="f-crm-status" class="filter-input" placeholder="例：合約、出貨、訂單..." oninput="filterCRM()" />
+          </div>
+          <div>
+            <div class="filter-label"><i class="fa-solid fa-magnifying-glass" style="margin-right:3px;"></i>全文搜尋</div>
+            <input id="f-crm-keyword" class="filter-input" placeholder="任何關鍵字..." oninput="filterCRM()" />
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:8px;">
+          <button class="btn-ghost" style="font-size:12px;padding:5px 12px;" onclick="clearCRMFilter()">
+            <i class="fa-solid fa-rotate-left" style="font-size:11px;margin-right:3px;"></i>清除篩選
+          </button>
+        </div>
+      </div>
+
+      <!-- 空白提示 -->
+      <div id="crm-empty-hint" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;text-align:center;color:var(--text-s);">
+        <i class="fa-solid fa-file-excel" style="font-size:40px;display:block;margin-bottom:12px;color:#1a7a4a;"></i>
+        <div style="font-size:15px;font-weight:500;color:var(--text-m);margin-bottom:8px;">尚未匯入 CRM 資料</div>
+        <div style="font-size:13px;margin-bottom:16px;">點擊右上角「匯入 Excel」上傳 CRM客戶需求統計 檔案</div>
+        <button class="btn-primary" onclick="openExcelImport()">
+          <i class="fa-solid fa-file-excel"></i> 立即匯入 Excel
+        </button>
+      </div>
+      <div id="crm-records" style="display:none;"></div>
     </div>
-    <div class="stats-row">
-      <div class="stat-card"><div style="font-size:11px;color:var(--text-s);margin-bottom:2px;">總任務</div><div id="se-total" style="font-size:22px;font-weight:700;color:var(--text-h);">0</div></div>
-      <div class="stat-card"><div style="font-size:11px;color:var(--text-s);margin-bottom:2px;">待處理</div><div id="se-pending" style="font-size:22px;font-weight:700;color:var(--text-m);">0</div></div>
-      <div class="stat-card"><div style="font-size:11px;color:var(--text-s);margin-bottom:2px;">進行中</div><div id="se-ongoing" style="font-size:22px;font-weight:700;color:var(--amber);">0</div></div>
-      <div class="stat-card"><div style="font-size:11px;color:var(--text-s);margin-bottom:2px;">完成</div><div id="se-done" style="font-size:22px;font-weight:700;color:var(--green);">0</div></div>
+  </div>
+    <div class="stats-row" id="eng-stats-row" style="margin-bottom:12px;"></div>
+    <div class="filter-panel">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div>
+          <div class="filter-label"><i class="fa-regular fa-building" style="margin-right:3px;"></i>對應客戶</div>
+          <select id="f-eng-company" class="filter-input" onchange="filterEngineer()">
+            <option value="">全部</option>
+          </select>
+        </div>
+        <div>
+          <div class="filter-label"><i class="fa-solid fa-microchip" style="margin-right:3px;"></i>機型</div>
+          <input id="f-eng-model" class="filter-input" placeholder="例：TM4、CCD..." oninput="filterEngineer()" />
+        </div>
+        <div>
+          <div class="filter-label"><i class="fa-solid fa-flask" style="margin-right:3px;"></i>測試項目</div>
+          <input id="f-eng-test" class="filter-input" placeholder="例：光衰、良率、公差..." oninput="filterEngineer()" />
+        </div>
+        <div>
+          <div class="filter-label"><i class="fa-solid fa-triangle-exclamation" style="margin-right:3px;"></i>異常問題</div>
+          <input id="f-eng-issue" class="filter-input" placeholder="例：過熱、尺寸偏差..." oninput="filterEngineer()" />
+        </div>
+      </div>
+      <div style="margin-top:10px;position:relative;">
+        <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-s);font-size:13px;pointer-events:none;"></i>
+        <input id="f-eng-keyword" class="filter-input" style="padding-left:32px;" placeholder="全文關鍵字搜尋（任何內容）..." oninput="filterEngineer()" />
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:8px;">
+        <button class="btn-ghost" style="font-size:12px;padding:5px 12px;" onclick="clearEngFilter()">
+          <i class="fa-solid fa-rotate-left" style="font-size:11px;margin-right:3px;"></i>清除篩選
+        </button>
+      </div>
     </div>
     <div id="eng-records"></div>
   </div>
 
+
 </main>
 
-<!-- IMPORT MODAL -->
+<!-- ══ IMPORT MODAL ══ -->
 <div id="import-modal" class="modal-overlay" style="display:none;" onclick="handleOverlayClick(event)">
   <div class="modal-box slide-in">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
@@ -236,40 +304,34 @@ mark { background:#ffe085; color:#5a3e00; border-radius:2px; padding:0 2px; }
       </div>
       <button onclick="closeImport()" class="btn-ghost" style="padding:5px 10px;"><i class="fa-solid fa-xmark"></i></button>
     </div>
-
     <div style="font-size:12px;color:var(--text-m);margin-bottom:7px;">訊息類型</div>
     <div style="display:flex;gap:8px;margin-bottom:16px;">
-      <button class="type-btn active" id="type-customer-btn" onclick="setMsgType('customer')"><i class="fa-solid fa-users" style="margin-right:4px;"></i>客戶訊息</button>
-      <button class="type-btn" id="type-engineer-btn" onclick="setMsgType('engineer')"><i class="fa-solid fa-screwdriver-wrench" style="margin-right:4px;"></i>工程師任務</button>
+      <button class="type-btn active" id="type-customer-btn" onclick="setMsgType('customer')"><i class="fa-solid fa-handshake" style="margin-right:4px;"></i>客戶商務</button>
+      <button class="type-btn" id="type-engineer-btn" onclick="setMsgType('engineer')"><i class="fa-solid fa-gears" style="margin-right:4px;"></i>設備／技術</button>
     </div>
-
     <div class="divider"><span>方式一：貼入聊天記錄，AI 自動解析</span></div>
-
-    <textarea id="paste-input" class="input-field" style="height:140px;margin-bottom:10px;font-size:13px;" placeholder="直接貼入整段微信聊天記錄（可含時間戳、多段對話）&#10;&#10;例如：&#10;王大明  10:32&#10;重庆方正有2台TM4，询单2周了，交期一直没给出来&#10;客户希望交期9、10内提供&#10;&#10;我  10:45&#10;好，我確認後回覆你"></textarea>
-
+    <textarea id="paste-input" class="input-field" style="height:140px;margin-bottom:10px;font-size:13px;"
+      placeholder="直接貼入整段微信聊天記錄（可含時間戳、多段對話）&#10;&#10;例如：&#10;王大明  10:32&#10;重庆方正有2台TM4，询单2周了，交期一直没给出来&#10;客户希望交期9月底前提供"></textarea>
     <div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:14px;">
       <button class="btn-ghost" onclick="document.getElementById('paste-input').value=''">清空</button>
       <button class="btn-primary" id="parse-btn" onclick="parseMessage()">
         <i class="fa-solid fa-wand-magic-sparkles"></i> AI 解析並儲存
       </button>
     </div>
-
     <div id="parse-result" style="display:none;margin-bottom:14px;"></div>
-
-    <!-- Worker URL (hidden, already hardcoded) -->
     <div id="worker-hint" style="display:none;"></div>
 
     <div class="divider"><span>方式二：手動輸入</span></div>
 
-    <!-- Customer form -->
+    <!-- 客戶商務 手動表單 -->
     <div id="manual-customer-form">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
         <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">客戶公司 <span style="color:var(--red);">*</span></div><input id="m-company" class="input-field" placeholder="例：華通" /></div>
         <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">聯絡人 <span style="color:var(--red);">*</span></div><input id="m-contact" class="input-field" placeholder="例：王大明" /></div>
         <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">機型</div><input id="m-model" class="input-field" placeholder="例：TM四向光 A3" /></div>
-        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">數量</div><input id="m-qty" class="input-field" type="number" placeholder="例：500" /></div>
-        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">價格</div><input id="m-price" class="input-field" placeholder="例：NT$85/pcs" /></div>
-        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">交期</div><input id="m-delivery" class="input-field" placeholder="例：6/30" /></div>
+        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">數量（台）</div><input id="m-qty" class="input-field" type="number" placeholder="例：2" /></div>
+        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">價格</div><input id="m-price" class="input-field" placeholder="例：NT$85萬、USD 12000" /></div>
+        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">交期</div><input id="m-delivery" class="input-field" placeholder="例：2024/9/30" /></div>
         <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">日期</div><input id="m-date" class="input-field" type="date" /></div>
         <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">狀態</div>
           <select id="m-status" class="input-field"><option value="詢價中">詢價中</option><option value="確認中">確認中</option><option value="已簽訂">已簽訂</option></select>
@@ -279,14 +341,16 @@ mark { background:#ffe085; color:#5a3e00; border-radius:2px; padding:0 2px; }
       <div style="display:flex;justify-content:flex-end;"><button class="btn-primary" onclick="manualSaveCustomer()"><i class="fa-solid fa-floppy-disk"></i> 儲存</button></div>
     </div>
 
-    <!-- Engineer form -->
+    <!-- 設備/技術 手動表單 -->
     <div id="manual-engineer-form" style="display:none;">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
         <div style="grid-column:1/-1;"><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">主題 <span style="color:var(--red);">*</span></div><input id="e-topic" class="input-field" placeholder="例：TM四向光 — 光衰測試" /></div>
+        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">對應客戶</div><input id="e-company" class="input-field" placeholder="例：華通" /></div>
+        <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">機型</div><input id="e-model" class="input-field" placeholder="例：TM四向光 A3" /></div>
         <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">工程師 <span style="color:var(--red);">*</span></div><input id="e-engineer" class="input-field" placeholder="例：陳工" /></div>
         <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">日期</div><input id="e-date" class="input-field" type="date" /></div>
-        <div style="grid-column:1/-1;"><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">指示內容</div><textarea id="e-instruction" class="input-field" style="height:60px;" placeholder="給工程師的指示..."></textarea></div>
-        <div style="grid-column:1/-1;"><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">回報進度</div><textarea id="e-progress" class="input-field" style="height:60px;" placeholder="工程師回報內容..."></textarea></div>
+        <div style="grid-column:1/-1;"><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">測試項目／指示內容</div><textarea id="e-instruction" class="input-field" style="height:60px;" placeholder="測試項目或給工程師的指示..."></textarea></div>
+        <div style="grid-column:1/-1;"><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">異常問題／回報進度</div><textarea id="e-progress" class="input-field" style="height:60px;" placeholder="異常狀況描述或工程師回報內容..."></textarea></div>
         <div><div style="font-size:12px;color:var(--text-m);margin-bottom:5px;">狀態</div>
           <select id="e-status" class="input-field"><option value="待處理">待處理</option><option value="進行中">進行中</option><option value="完成">完成</option></select>
         </div>
@@ -296,7 +360,7 @@ mark { background:#ffe085; color:#5a3e00; border-radius:2px; padding:0 2px; }
   </div>
 </div>
 
-<!-- DETAIL MODAL -->
+<!-- ══ DETAIL MODAL ══ -->
 <div id="detail-modal" class="modal-overlay" style="display:none;" onclick="handleDetailOverlay(event)">
   <div class="modal-box slide-in" id="detail-content-box"></div>
 </div>
@@ -304,30 +368,35 @@ mark { background:#ffe085; color:#5a3e00; border-radius:2px; padding:0 2px; }
 <script>
 var WORKER_URL = localStorage.getItem('workerUrl') || 'https://withered-sound-43b8.michelle-chang.workers.dev';
 
-function saveWorkerUrl(){
-  var v = document.getElementById('worker-url-input').value.trim().replace(/\/$/,'');
-  if(!v) return;
-  WORKER_URL = v;
-  localStorage.setItem('workerUrl', v);
-  document.getElementById('worker-hint').style.background='#d4f0e2';
-  document.getElementById('worker-hint').style.borderColor='#a0d8b8';
-  document.getElementById('worker-hint').innerHTML=
-    '<i class="fa-solid fa-circle-check" style="color:#1a7a4a;flex-shrink:0;"></i>'
-    +'<span style="color:#1a7a4a;font-size:12px;">Worker 已設定：'+v
-    +'&nbsp;<button onclick="resetWorkerUrl()" style="background:none;border:none;color:var(--text-m);font-size:12px;cursor:pointer;text-decoration:underline;">重設</button></span>';
-}
-function resetWorkerUrl(){ WORKER_URL=''; localStorage.removeItem('workerUrl'); location.reload(); }
+// ── 繁簡轉換 ──────────────────────────────────────────────────
+var T2S={'紅':'红','藍':'蓝','綠':'绿','黃':'黄','來':'来','對':'对','國':'国','時':'时','問':'问','訊':'讯','數':'数','機':'机','號':'号','線':'线','電':'电','頭':'头','樣':'样','廠':'厂','鋸':'锯','銑':'铣','鑽':'钻','點':'点','單':'单','貨':'货','換':'换','業':'业','發':'发','設':'设','備':'备','處':'处','確':'确','認':'认','銷':'销','產':'产','術':'术','應':'应','標':'标','準':'准','類':'类','層':'层','聯':'联','辦':'办','強':'强','價':'价','請':'请','稱':'称','測':'测','試':'试','結':'结','構':'构','過':'过','進':'进','項':'项','記':'记','開':'开','關':'关','長':'长','廣':'广','總':'总','現':'现','實':'实','際':'际','鐵':'铁','鋼':'钢','銅':'铜','鋁':'铝','輪':'轮','輸':'输','種':'种','論':'论','範':'范','閥':'阀','損':'损','製':'制','誤':'误','圖':'图','場':'场','顯':'显','燈':'灯','燒':'烧','紙':'纸','鋒':'锋','鎖':'锁','觸':'触','統':'统','碼':'码','節':'节','體':'体','資':'资','訂':'订','詢':'询','報':'报','費':'费','傳':'传','轉':'转','驗':'验','達':'达','導':'导','態':'态','萬':'万','號':'号','這':'这','後':'后','裡':'里','們':'们','個':'个','為':'为','於':'于','說':'说','對':'对','來':'来','從':'从','會':'会','當':'当','頭':'头','應':'应','無':'无','與':'与','給':'给','讓':'让','兩':'两','麼':'么','點':'点','時':'时','間':'间','問':'问','題':'题','邊':'边','師':'师','圖':'图','複':'复','繼':'继','續':'续','雙':'双','隻':'只','規':'规','則':'则','夠':'够','裝':'装'};
+var S2T={};
+Object.keys(T2S).forEach(function(t){S2T[T2S[t]]=t;});
+function toS(s){return String(s||'').split('').map(function(c){return T2S[c]||c;}).join('');}
+function toT(s){return String(s||'').split('').map(function(c){return S2T[c]||c;}).join('');}
+function norm(s){var v=String(s||'').toLowerCase();return v+' '+toS(v)+' '+toT(v);}
+function matchQ(hay,q){if(!q)return true;var n=q.toLowerCase();var h=norm(hay);return h.indexOf(n)>-1||h.indexOf(toS(n))>-1||h.indexOf(toT(n))>-1;}
 
-var custData = [
-  {id:1,company:'華通',contact:'王大明',date:'2024-06-10',model:'TM四向光 A3',qty:500,price:'NT$85/pcs',delivery:'6/30',status:'確認中',note:'',raw:'王大明  10:32\nTM四向光A3 500pcs 報價NT$85 交期6/30\n\n我  10:45\n好，確認後回覆',tags:['四向光','報價','A3']},
-  {id:2,company:'光電科技',contact:'林美華',date:'2024-06-08',model:'LED模組 B型',qty:1200,price:'NT$42/pcs',delivery:'7/15',status:'已簽訂',note:'客戶要求加速出貨',raw:'林美華  09:15\nLED模組B型 1200pcs 42元 7/15前一定要到',tags:['LED','量產','B型']},
-  {id:3,company:'鉅亞電子',contact:'張勝利',date:'2024-06-05',model:'TM雙向燈板',qty:200,price:'NT$120/pcs',delivery:'未定',status:'詢價中',note:'',raw:'張勝利  16:48\n雙向燈板200片 先給我報價 交期還沒確定',tags:['詢價','雙向']},
-  {id:4,company:'重慶方正',contact:'劉建國',date:'2024-06-03',model:'TM4',qty:2,price:'—',delivery:'9月底前',status:'詢價中',note:'詢單2周仍未給交期',raw:'劉建國  14:20\n重庆方正有2台TM4，询单2周了，交期一直没给出来\n客户希望交期9、10内提供',tags:['TM4','催單','交期']},
+function hl(text,q){
+  if(!q||!text) return String(text||'');
+  var variants=[q,toS(q),toT(q)].filter(function(v,i,a){return a.indexOf(v)===i&&v;});
+  var result=String(text);
+  variants.forEach(function(v){result=result.replace(new RegExp('('+v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark>$1</mark>');});
+  return result;
+}
+function escH(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// ── 資料 ─────────────────────────────────────────────────────
+var custData=[
+  {id:1,company:'華通',contact:'王大明',date:'2024-06-10',model:'TM四向光 A3',qty:2,price:'NT$85萬/台',delivery:'2024/6/30',status:'確認中',note:'',raw:'王大明  10:32\nTM四向光A3 2台 報價NT$85萬 交期6/30',tags:['四向光','報價']},
+  {id:2,company:'光電科技',contact:'林美華',date:'2024-06-08',model:'LED模組 B型',qty:3,price:'NT$42萬/台',delivery:'2024/7/15',status:'已簽訂',note:'客戶要求加速出貨',raw:'林美華  09:15\nLED模組B型 3台 42萬 7/15前一定要到',tags:['LED','量產']},
+  {id:3,company:'鉅亞電子',contact:'張勝利',date:'2024-06-05',model:'TM雙向燈板',qty:1,price:'待報價',delivery:'未定',status:'詢價中',note:'',raw:'張勝利  16:48\n雙向燈板1台 先給我報價 交期還沒確定',tags:['詢價','雙向']},
+  {id:4,company:'重慶方正',contact:'劉建國',date:'2024-06-03',model:'TM4',qty:2,price:'—',delivery:'2024/9-10月',status:'詢價中',note:'詢單2周仍未給交期',raw:'劉建國  14:20\n重庆方正有2台TM4，询单2周了，交期一直没给出来\n客户希望交期9、10月内提供',tags:['TM4','催單']},
 ];
-var engData = [
-  {id:1,topic:'TM四向光 — 光衰測試',engineer:'陳工',date:'2024-06-10',instruction:'請重新測量光衰曲線，尤其是高溫85°C條件下的數據',progress:'已完成初測，完整數據明天提供',status:'進行中',tags:['光衰','高溫測試']},
-  {id:2,topic:'模組組裝 — 良率改善',engineer:'林工 / 黃工',date:'2024-06-09',instruction:'第三道焊接工序溫度調降5°，觀察一周良率變化',progress:'良率從92%提升至95.8%，持續監控',status:'完成',tags:['良率','焊接']},
-  {id:3,topic:'B型外殼 — 尺寸公差確認',engineer:'吳工',date:'2024-06-07',instruction:'與供應商確認外殼公差±0.2mm是否可接受，取得書面確認',progress:'尚未回報',status:'待處理',tags:['公差','外殼','供應商']},
+var engData=[
+  {id:1,topic:'TM四向光 — 光衰測試',company:'華通',model:'TM四向光 A3',engineer:'陳工',date:'2024-06-10',instruction:'請重新測量光衰曲線，尤其是高溫85°C條件下的數據',progress:'已完成初測，完整數據明天提供',issue:'',status:'進行中',tags:['光衰','高溫測試']},
+  {id:2,topic:'模組組裝 — 良率改善',company:'光電科技',model:'LED模組 B型',engineer:'林工 / 黃工',date:'2024-06-09',instruction:'第三道焊接工序溫度調降5°，觀察一周良率變化',progress:'良率從92%提升至95.8%，持續監控',issue:'',status:'完成',tags:['良率','焊接']},
+  {id:3,topic:'B型外殼 — 尺寸公差確認',company:'鉅亞電子',model:'TM雙向燈板',engineer:'吳工',date:'2024-06-07',instruction:'與供應商確認外殼公差±0.2mm是否可接受',progress:'尚未回報',issue:'外殼尺寸偏差導致組裝困難',status:'待處理',tags:['公差','外殼']},
 ];
 var currentTab='customer';
 var currentMsgType='customer';
@@ -336,128 +405,183 @@ window.onload=function(){
   var today=new Date().toISOString().split('T')[0];
   document.getElementById('m-date').value=today;
   document.getElementById('e-date').value=today;
-  if(WORKER_URL) saveWorkerUrl();
   renderCustomer(custData);
+  renderCRM(crmData);
 };
 
+// ── TAB ──────────────────────────────────────────────────────
 function switchTab(tab){
   currentTab=tab;
   document.getElementById('tab-customer').style.display=tab==='customer'?'':'none';
   document.getElementById('tab-engineer').style.display=tab==='engineer'?'':'none';
-  var cb=document.getElementById('tab-cust-btn');
-  var eb=document.getElementById('tab-eng-btn');
-  cb.classList.toggle('active',tab==='customer');
-  eb.classList.toggle('active',tab==='engineer');
-  if(tab==='customer') renderCustomer(custData);
-  else renderEngineer(engData);
+  document.getElementById('tab-cust-btn').classList.toggle('active',tab==='customer');
+  document.getElementById('tab-eng-btn').classList.toggle('active',tab==='engineer');
+  if(tab==='customer'){ renderCustomer(custData); renderCRM(crmData); }
+  else if(tab==='engineer') renderEngineer(engData);
 }
 
-function hl(text,q){
-  if(!q||!text) return String(text||'');
-  return String(text).replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark>$1</mark>');
+// ── 清除篩選 ─────────────────────────────────────────────────
+function clearCustFilter(){
+  ['f-cust-company','f-cust-model','f-cust-delivery','f-cust-price','f-cust-keyword'].forEach(function(id){
+    var el=document.getElementById(id); if(el) el.value='';
+  });
+  renderCustomer(custData);
 }
-function escH(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function clearEngFilter(){
+  ['f-eng-company','f-eng-model','f-eng-test','f-eng-issue','f-eng-keyword'].forEach(function(id){
+    var el=document.getElementById(id); if(el) el.value='';
+  });
+  renderEngineer(engData);
+}
 
+// ── 客戶商務訊息 RENDER ──────────────────────────────────────
 function renderCustomer(data){
-  var q=(document.getElementById('cust-search')||{}).value||'';
-  var cf=(document.getElementById('cust-company-filter')||{}).value||'';
+  var company=(document.getElementById('f-cust-company')||{}).value||'';
+  var model=(document.getElementById('f-cust-model')||{}).value||'';
+  var delivery=(document.getElementById('f-cust-delivery')||{}).value||'';
+  var price=(document.getElementById('f-cust-price')||{}).value||'';
+  var keyword=(document.getElementById('f-cust-keyword')||{}).value||'';
+
+  // 更新公司下拉
   var companies=[];
   data.forEach(function(r){if(companies.indexOf(r.company)<0) companies.push(r.company);});
-  var sel=document.getElementById('cust-company-filter');
-  if(sel){var cur=sel.value;sel.innerHTML='<option value="">全部客戶</option>'+companies.map(function(c){return '<option value="'+escH(c)+'"'+(c===cur?' selected':'')+'>'+escH(c)+'</option>';}).join('');}
+  var sel=document.getElementById('f-cust-company');
+  if(sel){var cur=sel.value;sel.innerHTML='<option value="">全部</option>'+companies.map(function(c){return '<option value="'+escH(c)+'"'+(c===cur?' selected':'')+'>'+escH(c)+'</option>';}).join('');}
+
   var filtered=data.filter(function(r){
-    if(cf&&r.company!==cf) return false;
-    if(!q) return true;
-    return [r.company,r.contact,r.model,r.price,r.delivery,r.status,r.note,r.raw].concat(r.tags||[]).join(' ').toLowerCase().indexOf(q.toLowerCase())>-1;
+    if(company&&r.company!==company) return false;
+    if(model&&!matchQ([r.model,r.raw].join(' '),model)) return false;
+    if(delivery&&!matchQ([r.delivery,r.raw].join(' '),delivery)) return false;
+    if(price&&!matchQ([r.price,r.raw].join(' '),price)) return false;
+    if(keyword&&!matchQ([r.company,r.contact,r.model,r.price,r.delivery,r.status,r.note,r.raw].concat(r.tags||[]).join(' '),keyword)) return false;
+    return true;
   });
-  document.getElementById('sc-total').textContent=data.length;
-  document.getElementById('sc-inquiry').textContent=data.filter(function(r){return r.status==='詢價中';}).length;
-  document.getElementById('sc-confirm').textContent=data.filter(function(r){return r.status==='確認中';}).length;
-  document.getElementById('sc-signed').textContent=data.filter(function(r){return r.status==='已簽訂';}).length;
+
+  // 統計
+  var statsEl=document.getElementById('cust-stats-row');
+  statsEl.innerHTML=
+    '<span class="stat-pill">總筆數 <b>'+data.length+'</b></span>'
+    +'<span class="stat-pill" style="color:var(--amber);">詢價中 <b>'+data.filter(function(r){return r.status==='詢價中';}).length+'</b></span>'
+    +'<span class="stat-pill" style="color:var(--accent);">確認中 <b>'+data.filter(function(r){return r.status==='確認中';}).length+'</b></span>'
+    +'<span class="stat-pill" style="color:var(--green);">已簽訂 <b>'+data.filter(function(r){return r.status==='已簽訂';}).length+'</b></span>'
+    +(filtered.length<data.length?'<span class="stat-pill" style="color:var(--accent);border-color:var(--accent);">篩選結果 <b>'+filtered.length+'</b> 筆</span>':'');
+
   var scls={'詢價中':'badge-amber','確認中':'badge-blue','已簽訂':'badge-green'};
   var el=document.getElementById('cust-records');
+  var q=keyword||model||delivery||price;
   if(!filtered.length){el.innerHTML='<div class="empty-state"><i class="fa-solid fa-inbox" style="font-size:36px;display:block;margin-bottom:12px;"></i>查無符合紀錄</div>';return;}
   el.innerHTML=filtered.map(function(r){
-    return '<div class="msg-card" id="cust-card-'+r.id+'">'
+    return '<div class="msg-card" id="cc-'+r.id+'">'
       +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">'
-        +'<div style="flex:1;min-width:0;" onclick="showCustDetail('+r.id+')" style="cursor:pointer;">'
+        +'<div style="flex:1;min-width:0;cursor:pointer;" onclick="showCustDetail('+r.id+')">'
           +'<div style="display:flex;align-items:baseline;gap:5px;flex-wrap:wrap;">'
-            +'<span style="font-size:15px;font-weight:700;color:var(--text-h);"><i class="fa-regular fa-building" style="color:var(--accent);font-size:12px;margin-right:4px;"></i>'+hl(r.company,q)+'</span>'
+            +'<span style="font-size:15px;font-weight:700;color:var(--text-h);"><i class="fa-regular fa-building" style="color:var(--accent);font-size:12px;margin-right:4px;"></i>'+hl(r.company,keyword)+'</span>'
             +'<span style="color:var(--border2);font-size:13px;">/</span>'
-            +'<span style="font-size:14px;font-weight:500;color:var(--text-m);"><i class="fa-regular fa-user" style="font-size:11px;margin-right:3px;"></i>'+hl(r.contact,q)+'</span>'
+            +'<span style="font-size:14px;font-weight:500;color:var(--text-m);"><i class="fa-regular fa-user" style="font-size:11px;margin-right:3px;"></i>'+hl(r.contact,keyword)+'</span>'
           +'</div>'
-          +'<div style="font-size:13px;color:var(--text-s);margin-top:2px;"><i class="fa-solid fa-microchip" style="font-size:10px;margin-right:4px;"></i>'+hl(r.model||'—',q)+'</div>'
+          +'<div style="font-size:13px;color:var(--text-s);margin-top:2px;"><i class="fa-solid fa-microchip" style="font-size:10px;margin-right:4px;"></i>'+hl(r.model||'—',model||keyword)+'</div>'
         +'</div>'
         +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;">'
           +'<span class="badge '+(scls[r.status]||'badge-gray')+'">'+escH(r.status)+'</span>'
           +'<span style="font-size:11px;color:var(--text-s);">'+escH(r.date)+'</span>'
-          +'<button onclick="deleteCust('+r.id+')" style="background:none;border:none;cursor:pointer;color:var(--text-s);padding:2px 4px;border-radius:4px;font-size:12px;" title="刪除" onmouseover="this.style.color=\'var(--red)\'" onmouseout="this.style.color=\'var(--text-s)\'"><i class="fa-solid fa-trash-can"></i></button>'
+          +'<button class="del-btn" onclick="deleteCust('+r.id+')" title="刪除"><i class="fa-solid fa-trash-can"></i></button>'
         +'</div>'
       +'</div>'
-      +'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:9px;" onclick="showCustDetail('+r.id+')">'
-        +(r.qty?'<span class="badge badge-gray"><i class="fa-solid fa-box" style="font-size:9px;"></i> '+hl(String(r.qty),q)+' pcs</span>':'')
-        +(r.price&&r.price!=='—'?'<span class="badge badge-green"><i class="fa-solid fa-tag" style="font-size:9px;"></i> '+hl(r.price,q)+'</span>':'')
-        +(r.delivery&&r.delivery!=='—'?'<span class="badge badge-amber"><i class="fa-regular fa-calendar" style="font-size:9px;"></i> 交期 '+hl(r.delivery,q)+'</span>':'')
-        +(r.tags||[]).map(function(t){return '<span class="badge badge-gray">'+hl(t,q)+'</span>';}).join('')
+      +'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:9px;cursor:pointer;" onclick="showCustDetail('+r.id+')">'
+        +(r.qty?'<span class="badge badge-gray"><i class="fa-solid fa-desktop" style="font-size:9px;"></i> '+hl(String(r.qty),keyword)+' 台</span>':'')
+        +(r.price&&r.price!=='—'?'<span class="badge badge-green"><i class="fa-solid fa-tag" style="font-size:9px;"></i> '+hl(r.price,price||keyword)+'</span>':'')
+        +(r.delivery&&r.delivery!=='—'?'<span class="badge badge-amber"><i class="fa-regular fa-calendar" style="font-size:9px;"></i> 交期 '+hl(r.delivery,delivery||keyword)+'</span>':'')
+        +(r.tags||[]).map(function(t){return '<span class="badge badge-gray">'+hl(t,keyword)+'</span>';}).join('')
       +'</div>'
-      +(r.raw?'<div style="font-size:12px;color:var(--text-s);line-height:1.6;margin-top:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;" onclick="showCustDetail('+r.id+')">'+hl(r.raw,q)+'</div>':'')
+      +(r.raw?'<div style="font-size:12px;color:var(--text-s);line-height:1.6;margin-top:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer;" onclick="showCustDetail('+r.id+')">'+hl(r.raw,keyword)+'</div>':'')
     +'</div>';
   }).join('');
 }
-function deleteCust(id){
-  if(!confirm('確定刪除這筆客戶訊息？')) return;
-  custData = custData.filter(function(r){return r.id!==id;});
-  renderCustomer(custData);
-}
-function deleteEng(id){
-  if(!confirm('確定刪除這筆工程師任務？')) return;
-  engData = engData.filter(function(r){return r.id!==id;});
-  renderEngineer(engData);
-}
 function filterCustomer(){renderCustomer(custData);}
 
+// ── 設備/技術 RENDER ─────────────────────────────────────────
 function renderEngineer(data){
-  var q=(document.getElementById('eng-search')||{}).value||'';
-  var sf=(document.getElementById('eng-status-filter')||{}).value||'';
+  var company=(document.getElementById('f-eng-company')||{}).value||'';
+  var model=(document.getElementById('f-eng-model')||{}).value||'';
+  var test=(document.getElementById('f-eng-test')||{}).value||'';
+  var issue=(document.getElementById('f-eng-issue')||{}).value||'';
+  var keyword=(document.getElementById('f-eng-keyword')||{}).value||'';
+
+  // 更新公司下拉
+  var companies=[];
+  data.forEach(function(r){if(r.company&&companies.indexOf(r.company)<0) companies.push(r.company);});
+  var sel=document.getElementById('f-eng-company');
+  if(sel){var cur=sel.value;sel.innerHTML='<option value="">全部</option>'+companies.map(function(c){return '<option value="'+escH(c)+'"'+(c===cur?' selected':'')+'>'+escH(c)+'</option>';}).join('');}
+
   var filtered=data.filter(function(r){
-    if(sf&&r.status!==sf) return false;
-    if(!q) return true;
-    return [r.topic,r.engineer,r.instruction,r.progress].concat(r.tags||[]).join(' ').toLowerCase().indexOf(q.toLowerCase())>-1;
+    if(company&&r.company!==company) return false;
+    if(model&&!matchQ([r.model,r.topic,r.instruction].join(' '),model)) return false;
+    if(test&&!matchQ([r.instruction,r.progress,r.topic].join(' '),test)) return false;
+    if(issue&&!matchQ([r.issue,r.progress,r.instruction].join(' '),issue)) return false;
+    if(keyword&&!matchQ([r.topic,r.company,r.model,r.engineer,r.instruction,r.progress,r.issue].concat(r.tags||[]).join(' '),keyword)) return false;
+    return true;
   });
-  document.getElementById('se-total').textContent=data.length;
-  document.getElementById('se-pending').textContent=data.filter(function(r){return r.status==='待處理';}).length;
-  document.getElementById('se-ongoing').textContent=data.filter(function(r){return r.status==='進行中';}).length;
-  document.getElementById('se-done').textContent=data.filter(function(r){return r.status==='完成';}).length;
+
+  // 統計
+  var statsEl=document.getElementById('eng-stats-row');
+  statsEl.innerHTML=
+    '<span class="stat-pill">總任務 <b>'+data.length+'</b></span>'
+    +'<span class="stat-pill" style="color:var(--text-m);">待處理 <b>'+data.filter(function(r){return r.status==='待處理';}).length+'</b></span>'
+    +'<span class="stat-pill" style="color:var(--amber);">進行中 <b>'+data.filter(function(r){return r.status==='進行中';}).length+'</b></span>'
+    +'<span class="stat-pill" style="color:var(--green);">完成 <b>'+data.filter(function(r){return r.status==='完成';}).length+'</b></span>'
+    +(filtered.length<data.length?'<span class="stat-pill" style="color:var(--accent);border-color:var(--accent);">篩選結果 <b>'+filtered.length+'</b> 筆</span>':'');
+
   var scls={'待處理':'badge-gray','進行中':'badge-amber','完成':'badge-teal'};
   var dcls={'待處理':'dot-gray','進行中':'dot-amber','完成':'dot-green'};
   var el=document.getElementById('eng-records');
   if(!filtered.length){el.innerHTML='<div class="empty-state"><i class="fa-solid fa-inbox" style="font-size:36px;display:block;margin-bottom:12px;"></i>查無符合紀錄</div>';return;}
   el.innerHTML=filtered.map(function(r){
-    return '<div class="msg-card" id="eng-card-'+r.id+'">'
+    var q=keyword||model||test||issue;
+    return '<div class="msg-card" id="ec-'+r.id+'">'
       +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">'
-        +'<div style="flex:1;min-width:0;" onclick="showEngDetail('+r.id+')" style="cursor:pointer;">'
+        +'<div style="flex:1;min-width:0;cursor:pointer;" onclick="showEngDetail('+r.id+')">'
           +'<div style="font-size:15px;font-weight:700;color:var(--text-h);">'+hl(r.topic,q)+'</div>'
-          +'<div style="font-size:12px;color:var(--text-s);margin-top:3px;"><i class="fa-solid fa-user-gear" style="font-size:10px;margin-right:4px;"></i>'+hl(r.engineer,q)+' · '+escH(r.date)+'</div>'
+          +'<div style="font-size:12px;color:var(--text-s);margin-top:3px;display:flex;gap:10px;flex-wrap:wrap;">'
+            +(r.company?'<span><i class="fa-regular fa-building" style="font-size:10px;margin-right:3px;"></i>'+hl(r.company,company||keyword)+'</span>':'')
+            +(r.model?'<span><i class="fa-solid fa-microchip" style="font-size:10px;margin-right:3px;"></i>'+hl(r.model,model||keyword)+'</span>':'')
+            +'<span><i class="fa-solid fa-user-gear" style="font-size:10px;margin-right:3px;"></i>'+hl(r.engineer,keyword)+'</span>'
+            +'<span>'+escH(r.date)+'</span>'
+          +'</div>'
         +'</div>'
         +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;">'
-          +'<span class="badge '+(scls[r.status]||'badge-gray')+'" style="flex-shrink:0;"><span class="status-dot '+(dcls[r.status]||'dot-gray')+'" style="margin-right:3px;"></span>'+escH(r.status)+'</span>'
-          +'<button onclick="deleteEng('+r.id+')" style="background:none;border:none;cursor:pointer;color:var(--text-s);padding:2px 4px;border-radius:4px;font-size:12px;" title="刪除" onmouseover="this.style.color=\'var(--red)\'" onmouseout="this.style.color=\'var(--text-s)\'"><i class="fa-solid fa-trash-can"></i></button>'
+          +'<span class="badge '+(scls[r.status]||'badge-gray')+'"><span class="status-dot '+(dcls[r.status]||'dot-gray')+'" style="margin-right:3px;"></span>'+escH(r.status)+'</span>'
+          +'<button class="del-btn" onclick="deleteEng('+r.id+')" title="刪除"><i class="fa-solid fa-trash-can"></i></button>'
         +'</div>'
       +'</div>'
-      +'<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);" onclick="showEngDetail('+r.id+')">'
-        +'<div style="font-size:11px;color:var(--text-s);letter-spacing:0.5px;margin-bottom:3px;">指示</div>'
-        +'<div style="font-size:13px;color:var(--text-m);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">'+hl(r.instruction||'—',q)+'</div>'
+      +'<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:8px;cursor:pointer;" onclick="showEngDetail('+r.id+')">'
+        +'<div>'
+          +'<div style="font-size:11px;color:var(--text-s);margin-bottom:3px;"><i class="fa-solid fa-flask" style="font-size:10px;margin-right:3px;"></i>測試項目／指示</div>'
+          +'<div style="font-size:13px;color:var(--text-m);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">'+hl(r.instruction||'—',test||keyword)+'</div>'
+        +'</div>'
+        +'<div>'
+          +'<div style="font-size:11px;color:var(--text-s);margin-bottom:3px;"><i class="fa-solid fa-triangle-exclamation" style="font-size:10px;margin-right:3px;"></i>異常問題／回報</div>'
+          +'<div style="font-size:13px;color:var(--text-m);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">'+hl((r.issue?r.issue+' / ':'')+( r.progress||'尚未回報'),issue||keyword)+'</div>'
+        +'</div>'
       +'</div>'
-      +'<div style="margin-top:8px;" onclick="showEngDetail('+r.id+')">'
-        +'<div style="font-size:11px;color:var(--text-s);letter-spacing:0.5px;margin-bottom:3px;">最新回報</div>'
-        +'<div style="font-size:13px;color:var(--text-m);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">'+hl(r.progress||'尚未回報',q)+'</div>'
-      +'</div>'
-      +(r.tags&&r.tags.length?'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:9px;">'+(r.tags||[]).map(function(t){return '<span class="badge badge-gray">'+hl(t,q)+'</span>';}).join('')+'</div>':'')
+      +(r.tags&&r.tags.length?'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:9px;">'+(r.tags||[]).map(function(t){return '<span class="badge badge-gray">'+hl(t,keyword)+'</span>';}).join('')+'</div>':'')
     +'</div>';
   }).join('');
 }
 function filterEngineer(){renderEngineer(engData);}
 
+// ── 刪除 ─────────────────────────────────────────────────────
+function deleteCust(id){
+  if(!confirm('確定刪除這筆客戶商務訊息？')) return;
+  custData=custData.filter(function(r){return r.id!==id;});
+  renderCustomer(custData);
+}
+function deleteEng(id){
+  if(!confirm('確定刪除這筆設備／技術訊息？')) return;
+  engData=engData.filter(function(r){return r.id!==id;});
+  renderEngineer(engData);
+}
+
+// ── DETAIL ───────────────────────────────────────────────────
 function showCustDetail(id){
   var r=custData.find(function(x){return x.id===id;});
   if(!r) return;
@@ -465,7 +589,7 @@ function showCustDetail(id){
   document.getElementById('detail-content-box').innerHTML=
     '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;">'
       +'<div>'
-        +'<div style="font-size:11px;color:var(--text-s);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">客戶訊息</div>'
+        +'<div style="font-size:11px;color:var(--text-s);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">客戶商務訊息</div>'
         +'<div style="font-size:19px;font-weight:700;color:var(--text-h);"><i class="fa-regular fa-building" style="color:var(--accent);margin-right:6px;font-size:15px;"></i>'+escH(r.company)+'</div>'
         +'<div style="font-size:14px;color:var(--text-m);margin-top:4px;"><i class="fa-regular fa-user" style="margin-right:5px;font-size:12px;"></i>'+escH(r.contact)+'</div>'
       +'</div>'
@@ -476,7 +600,7 @@ function showCustDetail(id){
     +'</div>'
     +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">'
       +fbox('機型','fa-microchip',r.model||'—')
-      +fbox('數量','fa-box',r.qty?r.qty+' pcs':'—')
+      +fbox('數量','fa-desktop',r.qty?r.qty+' 台':'—')
       +fbox('價格','fa-tag',r.price||'—')
       +fbox('交期','fa-calendar',r.delivery||'—')
       +fbox('日期','fa-calendar-days',r.date||'—')
@@ -494,35 +618,37 @@ function showEngDetail(id){
   document.getElementById('detail-content-box').innerHTML=
     '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;">'
       +'<div style="flex:1;margin-right:12px;">'
-        +'<div style="font-size:11px;color:var(--text-s);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">工程師任務</div>'
+        +'<div style="font-size:11px;color:var(--text-s);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">設備／技術相關訊息</div>'
         +'<div style="font-size:17px;font-weight:700;color:var(--text-h);">'+escH(r.topic)+'</div>'
-        +'<div style="font-size:13px;color:var(--text-m);margin-top:5px;"><i class="fa-solid fa-user-gear" style="margin-right:5px;font-size:11px;"></i>'+escH(r.engineer)+' · '+escH(r.date)+'</div>'
+        +'<div style="font-size:13px;color:var(--text-m);margin-top:5px;display:flex;gap:12px;flex-wrap:wrap;">'
+          +(r.company?'<span><i class="fa-regular fa-building" style="margin-right:4px;font-size:11px;"></i>'+escH(r.company)+'</span>':'')
+          +(r.model?'<span><i class="fa-solid fa-microchip" style="margin-right:4px;font-size:11px;"></i>'+escH(r.model)+'</span>':'')
+          +'<span><i class="fa-solid fa-user-gear" style="margin-right:4px;font-size:11px;"></i>'+escH(r.engineer)+'</span>'
+          +'<span>'+escH(r.date)+'</span>'
+        +'</div>'
       +'</div>'
       +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:7px;">'
         +'<span class="badge '+(scls[r.status]||'badge-gray')+'" style="font-size:12px;padding:4px 10px;">'+escH(r.status)+'</span>'
         +'<button onclick="closeDetail()" class="btn-ghost" style="padding:5px 10px;"><i class="fa-solid fa-xmark"></i></button>'
       +'</div>'
     +'</div>'
-    +'<div style="margin-bottom:12px;"><div style="font-size:11px;color:var(--text-s);margin-bottom:5px;">指示內容</div><div class="raw-block">'+escH(r.instruction||'—')+'</div></div>'
-    +'<div style="margin-bottom:12px;"><div style="font-size:11px;color:var(--text-s);margin-bottom:5px;">最新回報</div><div class="raw-block" style="border-color:var(--border2);color:var(--text-b);">'+escH(r.progress||'尚未回報')+'</div></div>'
-    +(r.tags&&r.tags.length?'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;">'+(r.tags||[]).map(function(t){return '<span class="badge badge-gray">'+escH(t)+'</span>';}).join('')+'</div>':'');
+    +'<div style="margin-bottom:12px;"><div style="font-size:11px;color:var(--text-s);margin-bottom:5px;"><i class="fa-solid fa-flask" style="margin-right:4px;"></i>測試項目／指示內容</div><div class="raw-block">'+escH(r.instruction||'—')+'</div></div>'
+    +(r.issue?'<div style="margin-bottom:12px;"><div style="font-size:11px;color:var(--red);margin-bottom:5px;"><i class="fa-solid fa-triangle-exclamation" style="margin-right:4px;"></i>異常問題</div><div class="raw-block" style="border-color:var(--red);color:var(--red);">'+escH(r.issue)+'</div></div>':'')
+    +'<div style="margin-bottom:12px;"><div style="font-size:11px;color:var(--text-s);margin-bottom:5px;"><i class="fa-solid fa-reply" style="margin-right:4px;"></i>回報進度</div><div class="raw-block" style="border-color:var(--border2);color:var(--text-b);">'+escH(r.progress||'尚未回報')+'</div></div>'
+    +(r.tags&&r.tags.length?'<div style="display:flex;flex-wrap:wrap;gap:5px;">'+(r.tags||[]).map(function(t){return '<span class="badge badge-gray">'+escH(t)+'</span>';}).join('')+'</div>':'');
   document.getElementById('detail-modal').style.display='flex';
 }
 
 function fbox(label,icon,value){
   return '<div class="field-box"><div class="field-label"><i class="fa-solid '+icon+'" style="font-size:10px;margin-right:3px;"></i>'+label+'</div><div class="field-value">'+escH(value)+'</div></div>';
 }
-
 function closeDetail(){document.getElementById('detail-modal').style.display='none';}
 function handleDetailOverlay(e){if(e.target===document.getElementById('detail-modal')) closeDetail();}
 
-function openImport(){
-  document.getElementById('import-modal').style.display='flex';
-  document.getElementById('parse-result').style.display='none';
-}
-function closeImport(){document.getElementById('import-modal').style.display='none';}
-function handleOverlayClick(e){if(e.target===document.getElementById('import-modal')) closeImport();}
-
+// ── IMPORT ───────────────────────────────────────────────────
+function openImport(){ document.getElementById('import-modal').style.display='flex'; document.getElementById('parse-result').style.display='none'; }
+function closeImport(){ document.getElementById('import-modal').style.display='none'; }
+function handleOverlayClick(e){ if(e.target===document.getElementById('import-modal')) closeImport(); }
 function setMsgType(type){
   currentMsgType=type;
   document.getElementById('type-customer-btn').classList.toggle('active',type==='customer');
@@ -531,37 +657,40 @@ function setMsgType(type){
   document.getElementById('manual-engineer-form').style.display=type==='engineer'?'':'none';
 }
 
+// ── AI PARSE ─────────────────────────────────────────────────
 async function parseMessage(){
   var text=document.getElementById('paste-input').value.trim();
   if(!text){alert('請先貼入微信聊天記錄');return;}
-  if(!WORKER_URL){alert('請先填入 Cloudflare Worker 網址（匯入視窗藍色提示框）');return;}
   var btn=document.getElementById('parse-btn');
   var resultEl=document.getElementById('parse-result');
   btn.disabled=true;
   btn.innerHTML='<span class="spinner"></span> AI 解析中...';
   resultEl.style.display='block';
-  resultEl.innerHTML='<div style="background:var(--accent-bg);border:1px solid #b8d4f4;border-radius:10px;padding:12px 14px;font-size:13px;color:var(--accent);display:flex;align-items:center;gap:8px;"><span class="spinner"></span> Claude 正在理解你的訊息，請稍候...</div>';
+  resultEl.innerHTML='<div style="background:var(--accent-bg);border:1px solid #b8d4f4;border-radius:10px;padding:12px 14px;font-size:13px;color:var(--accent);display:flex;align-items:center;gap:8px;"><span class="spinner"></span> AI 正在理解訊息內容...</div>';
+
   var isCustomer=currentMsgType==='customer';
   var systemPrompt=isCustomer
-    ?'你是訊息解析助理。仔細閱讀以下微信聊天記錄，提取所有可識別的資訊，回傳純JSON（不含markdown）包含：company(客戶公司名稱，若不確定填null), contact(聯絡人/發話者姓名), date(最近日期YYYY-MM-DD，若無填今天), model(機型或產品名稱，若有), qty(數量純數字，若有), price(價格含單位，若有), delivery(交期描述，若有), status(詢價中/確認中/已簽訂 三選一，依語意判斷), note(重要備註), raw(原始訊息完整文字), tags(2至4個關鍵標籤陣列)。'
-    :'你是訊息解析助理。仔細閱讀以下微信聊天記錄，回傳純JSON（不含markdown）包含：topic(任務主題，格式"產品或系統 — 具體事項"), engineer(工程師或負責人名稱), date(最近日期YYYY-MM-DD，若無填今天), instruction(指示或要求內容), progress(回報或進度，若無填"尚未回報"), status(待處理/進行中/完成 三選一，依語意判斷), tags(2至4個關鍵標籤陣列)。';
+    ?'你是工業設備商務訊息解析助理。從微信聊天記錄提取資訊，回傳純JSON（不含markdown）包含：company(客戶公司名稱), contact(聯絡人姓名), date(日期YYYY-MM-DD，若無填今天), model(機型或產品名稱), qty(數量純數字，單位為台), price(價格含幣別，例如NT$85萬、USD12000、RMB8萬，若有多個價格都記錄), delivery(交期，格式YYYY/MM/DD或描述), status(詢價中/確認中/已簽訂 三選一), note(重要備註), raw(原始訊息完整文字), tags(2至4個關鍵標籤陣列)。'
+    :'你是工業設備技術訊息解析助理。從微信聊天記錄提取資訊，回傳純JSON（不含markdown）包含：topic(任務主題，格式"機型 — 具體事項"), company(對應客戶公司名稱，若有), model(機型或設備名稱，若有), engineer(工程師或負責人名稱), date(日期YYYY-MM-DD，若無填今天), instruction(測試項目或指示內容), issue(異常問題描述，若有異常狀況才填，否則填空字串), progress(回報進度，若無填"尚未回報"), status(待處理/進行中/完成 三選一), tags(2至4個關鍵標籤陣列)。';
+
   try{
     var resp=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1200,system:systemPrompt,messages:[{role:'user',content:text}]})});
     var data=await resp.json();
-    if(data.error) throw new Error(data.error.message||JSON.stringify(data.error));
+    if(data.error) throw new Error(typeof data.error==='string'?data.error:JSON.stringify(data.error));
     var raw=data.content.map(function(c){return c.text||'';}).join('');
     var clean=raw.replace(/```json|```/g,'').trim();
     var parsed=JSON.parse(clean);
     parsed.id=Date.now();
     if(!parsed.tags) parsed.tags=[];
+
     if(isCustomer){
       if(!parsed.raw) parsed.raw=text;
       custData.unshift(parsed);
-      resultEl.innerHTML='<div style="background:var(--green-bg);border:1px solid #a0d8b8;border-radius:10px;padding:12px 14px;"><div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px;"><i class="fa-solid fa-circle-check" style="margin-right:5px;"></i>解析成功，已加入「客戶往來」</div><div style="display:flex;flex-wrap:wrap;gap:5px;">'
+      resultEl.innerHTML='<div style="background:var(--green-bg);border:1px solid #a0d8b8;border-radius:10px;padding:12px 14px;"><div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px;"><i class="fa-solid fa-circle-check" style="margin-right:5px;"></i>解析成功，已加入「客戶商務訊息」</div><div style="display:flex;flex-wrap:wrap;gap:5px;">'
         +(parsed.company?'<span class="badge badge-blue">'+escH(parsed.company)+'</span>':'')
         +(parsed.contact?'<span class="badge badge-gray">'+escH(parsed.contact)+'</span>':'')
         +(parsed.model?'<span class="badge badge-gray">'+escH(parsed.model)+'</span>':'')
-        +(parsed.qty?'<span class="badge badge-gray">'+parsed.qty+' pcs</span>':'')
+        +(parsed.qty?'<span class="badge badge-gray">'+parsed.qty+' 台</span>':'')
         +(parsed.price?'<span class="badge badge-green">'+escH(parsed.price)+'</span>':'')
         +(parsed.delivery?'<span class="badge badge-amber">交期 '+escH(parsed.delivery)+'</span>':'')
         +'</div></div>';
@@ -569,22 +698,26 @@ async function parseMessage(){
       if(currentTab==='customer') renderCustomer(custData);
     } else {
       engData.unshift(parsed);
-      resultEl.innerHTML='<div style="background:var(--green-bg);border:1px solid #a0d8b8;border-radius:10px;padding:12px 14px;"><div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px;"><i class="fa-solid fa-circle-check" style="margin-right:5px;"></i>解析成功，已加入「工程師任務」</div><div style="display:flex;flex-wrap:wrap;gap:5px;">'
+      resultEl.innerHTML='<div style="background:var(--green-bg);border:1px solid #a0d8b8;border-radius:10px;padding:12px 14px;"><div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px;"><i class="fa-solid fa-circle-check" style="margin-right:5px;"></i>解析成功，已加入「設備／技術相關訊息」</div><div style="display:flex;flex-wrap:wrap;gap:5px;">'
         +(parsed.topic?'<span class="badge badge-blue">'+escH(parsed.topic)+'</span>':'')
+        +(parsed.company?'<span class="badge badge-gray">'+escH(parsed.company)+'</span>':'')
+        +(parsed.model?'<span class="badge badge-gray">'+escH(parsed.model)+'</span>':'')
         +(parsed.engineer?'<span class="badge badge-gray">'+escH(parsed.engineer)+'</span>':'')
         +(parsed.status?'<span class="badge badge-amber">'+escH(parsed.status)+'</span>':'')
+        +(parsed.issue?'<span class="badge badge-red"><i class="fa-solid fa-triangle-exclamation" style="font-size:9px;margin-right:3px;"></i>異常</span>':'')
         +'</div></div>';
       document.getElementById('paste-input').value='';
       if(currentTab==='engineer') renderEngineer(engData);
     }
   }catch(err){
-    resultEl.innerHTML='<div style="background:var(--red-bg);border:1px solid #f0b8b8;border-radius:10px;padding:12px 14px;font-size:13px;color:var(--red);"><i class="fa-solid fa-circle-exclamation" style="margin-right:6px;"></i>解析失敗：'+escH(err.message)+'<div style="color:var(--text-s);font-size:12px;margin-top:4px;">請確認 Worker 網址是否正確，或改用下方手動輸入方式。</div></div>';
+    resultEl.innerHTML='<div style="background:var(--red-bg);border:1px solid #f0b8b8;border-radius:10px;padding:12px 14px;font-size:13px;color:var(--red);"><i class="fa-solid fa-circle-exclamation" style="margin-right:6px;"></i>解析失敗：'+escH(err.message)+'<div style="color:var(--text-s);font-size:12px;margin-top:4px;">請改用下方手動輸入方式。</div></div>';
   }finally{
     btn.disabled=false;
     btn.innerHTML='<i class="fa-solid fa-wand-magic-sparkles"></i> AI 解析並儲存';
   }
 }
 
+// ── 手動儲存 ─────────────────────────────────────────────────
 function manualSaveCustomer(){
   var company=document.getElementById('m-company').value.trim();
   var contact=document.getElementById('m-contact').value.trim();
@@ -598,14 +731,282 @@ function manualSaveEngineer(){
   var topic=document.getElementById('e-topic').value.trim();
   var engineer=document.getElementById('e-engineer').value.trim();
   if(!topic||!engineer){alert('請填入主題與工程師');return;}
-  engData.unshift({id:Date.now(),topic:topic,engineer:engineer,date:document.getElementById('e-date').value,instruction:document.getElementById('e-instruction').value.trim(),progress:document.getElementById('e-progress').value.trim()||'尚未回報',status:document.getElementById('e-status').value,tags:[]});
+  engData.unshift({id:Date.now(),topic:topic,company:document.getElementById('e-company').value.trim(),model:document.getElementById('e-model').value.trim(),engineer:engineer,date:document.getElementById('e-date').value,instruction:document.getElementById('e-instruction').value.trim(),issue:'',progress:document.getElementById('e-progress').value.trim()||'尚未回報',status:document.getElementById('e-status').value,tags:[]});
   if(currentTab==='engineer') renderEngineer(engData);
-  ['e-topic','e-engineer','e-instruction','e-progress'].forEach(function(id){document.getElementById(id).value='';});
+  ['e-topic','e-company','e-model','e-engineer','e-instruction','e-progress'].forEach(function(id){document.getElementById(id).value='';});
   closeImport();
+}
+</script>
+<!-- ══ EXCEL IMPORT MODAL ══ -->
+<div id="excel-modal" class="modal-overlay" style="display:none;" onclick="handleExcelOverlay(event)">
+  <div class="modal-box slide-in" style="max-width:500px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+      <div style="font-size:16px;font-weight:700;color:var(--text-h);">
+        <i class="fa-solid fa-file-excel" style="color:#1a7a4a;margin-right:8px;"></i>匯入 CRM Excel
+      </div>
+      <button onclick="closeExcelImport()" class="btn-ghost" style="padding:5px 10px;"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div style="background:var(--green-bg);border:1px solid #a0d8b8;border-radius:8px;padding:10px 14px;font-size:12px;color:var(--green);margin-bottom:16px;line-height:1.7;">
+      <i class="fa-solid fa-circle-info" style="margin-right:5px;"></i>
+      支援格式：<b>CRM客戶需求統計</b> Excel 檔案<br>
+      系統會自動讀取所有業務分頁，解析客戶、機型、數量、需求時間、最新進度。
+    </div>
+
+    <!-- 拖放區域 -->
+    <div id="excel-drop-zone" style="border:2px dashed var(--border);border-radius:12px;padding:32px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:14px;"
+      onclick="document.getElementById('excel-file-input').click()"
+      ondragover="handleDragOver(event)"
+      ondragleave="handleDragLeave(event)"
+      ondrop="handleDrop(event)">
+      <i class="fa-solid fa-cloud-arrow-up" style="font-size:32px;color:var(--text-s);display:block;margin-bottom:10px;"></i>
+      <div style="font-size:14px;font-weight:500;color:var(--text-m);">點擊或拖放 Excel 檔案到這裡</div>
+      <div style="font-size:12px;color:var(--text-s);margin-top:4px;">支援 .xlsx 格式</div>
+    </div>
+    <input type="file" id="excel-file-input" accept=".xlsx,.xls" style="display:none;" onchange="handleExcelFile(event)" />
+
+    <div id="excel-result" style="display:none;"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script>
+// ══ CRM 資料 ════════════════════════════════════════════════
+var crmData = [];
+
+// ══ Excel 匯入 ══════════════════════════════════════════════
+function openExcelImport(){
+  document.getElementById('excel-modal').style.display='flex';
+  document.getElementById('excel-result').style.display='none';
+  resetDropZone();
+}
+function closeExcelImport(){ document.getElementById('excel-modal').style.display='none'; }
+function handleExcelOverlay(e){ if(e.target===document.getElementById('excel-modal')) closeExcelImport(); }
+
+function resetDropZone(){
+  var dz=document.getElementById('excel-drop-zone');
+  dz.style.borderColor='var(--border)';
+  dz.style.background='transparent';
+}
+function handleDragOver(e){
+  e.preventDefault();
+  var dz=document.getElementById('excel-drop-zone');
+  dz.style.borderColor='var(--accent)';
+  dz.style.background='var(--accent-bg)';
+}
+function handleDragLeave(e){ resetDropZone(); }
+function handleDrop(e){
+  e.preventDefault();
+  resetDropZone();
+  var file=e.dataTransfer.files[0];
+  if(file) processExcelFile(file);
+}
+function handleExcelFile(e){
+  var file=e.target.files[0];
+  if(file) processExcelFile(file);
+}
+
+function processExcelFile(file){
+  var resultEl=document.getElementById('excel-result');
+  resultEl.style.display='block';
+  resultEl.innerHTML='<div style="background:var(--accent-bg);border:1px solid #b8d4f4;border-radius:10px;padding:12px;font-size:13px;color:var(--accent);display:flex;align-items:center;gap:8px;"><span class="spinner"></span> 正在解析 Excel，請稍候...</div>';
+
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      var data=new Uint8Array(e.target.result);
+      var workbook=XLSX.read(data,{type:'array'});
+
+      // 略過非業務分頁
+      var skipSheets=['已接訂單','已無需求_結案','Sheet1','Sheet2'];
+      var parsed=[];
+      var sheetCount=0;
+      var rowCount=0;
+
+      workbook.SheetNames.forEach(function(sheetName){
+        if(skipSheets.indexOf(sheetName)>-1) return;
+        var ws=workbook.Sheets[sheetName];
+        var rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
+        sheetCount++;
+
+        var salesName=sheetName; // 分頁名稱就是業務姓名
+        var currentCustomer='';
+
+        rows.forEach(function(row,idx){
+          if(idx<2) return; // 跳過標題列
+          var sales=String(row[0]||'').trim();
+          var customer=String(row[1]||'').trim();
+          var model=String(row[2]||'').trim();
+          var qty=String(row[3]||'').trim();
+          var delivery=String(row[4]||'').trim();
+
+          if(!model) return; // 沒有機型就跳過
+
+          // 業務名稱有時候只在第一行出現
+          if(sales) salesName=sales;
+          if(customer) currentCustomer=customer;
+
+          // 找最新進度（從後面的週次欄找最後一個非空的值）
+          var latestStatus='';
+          var latestWeek='';
+          for(var i=row.length-1;i>=5;i--){
+            var v=String(row[i]||'').trim();
+            if(v){
+              latestStatus=v;
+              // 嘗試找對應的週次（從 ws 的 header row 讀）
+              break;
+            }
+          }
+
+          // 處理交期顯示（有些是 Excel 日期數字）
+          var deliveryStr=delivery;
+          if(!isNaN(delivery)&&delivery!==''){
+            try{
+              var d=XLSX.SSF.parse_date_code(Number(delivery));
+              if(d) deliveryStr=d.y+'/'+(d.m<10?'0':'')+d.m+'/'+(d.d<10?'0':'')+d.d;
+            }catch(e){}
+          }
+
+          rowCount++;
+          parsed.push({
+            id: Date.now()+rowCount,
+            sales: salesName,
+            customer: currentCustomer,
+            model: model,
+            qty: qty,
+            delivery: deliveryStr,
+            status: latestStatus,
+            sheet: sheetName,
+            raw: [salesName,currentCustomer,model,qty,deliveryStr,latestStatus].join(' ')
+          });
+        });
+      });
+
+      crmData=parsed;
+
+      // 顯示結果
+      resultEl.innerHTML='<div style="background:var(--green-bg);border:1px solid #a0d8b8;border-radius:10px;padding:12px 14px;">'
+        +'<div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px;"><i class="fa-solid fa-circle-check" style="margin-right:5px;"></i>匯入成功！</div>'
+        +'<div style="font-size:13px;color:var(--text-m);">'
+        +'共讀取 <b>'+sheetCount+'</b> 位業務，<b>'+rowCount+'</b> 筆訂單資料'
+        +'</div>'
+        +'<button class="btn-primary" style="margin-top:10px;width:100%;justify-content:center;" onclick="closeExcelImport();switchTab(\'customer\')">'
+        +'<i class="fa-solid fa-magnifying-glass"></i> 前往 CRM 搜尋'
+        +'</button>'
+        +'</div>';
+
+      // 更新 CRM 分頁
+      renderCRM(crmData);
+
+    }catch(err){
+      resultEl.innerHTML='<div style="background:var(--red-bg);border:1px solid #f0b8b8;border-radius:10px;padding:12px;font-size:13px;color:var(--red);">'
+        +'<i class="fa-solid fa-circle-exclamation" style="margin-right:5px;"></i>解析失敗：'+escH(err.message)
+        +'<div style="color:var(--text-s);font-size:12px;margin-top:4px;">請確認上傳的是正確的 CRM Excel 格式（.xlsx）</div>'
+        +'</div>';
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// ══ CRM RENDER ══════════════════════════════════════════════
+function renderCRM(data){
+  var sales=(document.getElementById('f-crm-sales')||{}).value||'';
+  var customer=(document.getElementById('f-crm-customer')||{}).value||'';
+  var model=(document.getElementById('f-crm-model')||{}).value||'';
+  var delivery=(document.getElementById('f-crm-delivery')||{}).value||'';
+  var status=(document.getElementById('f-crm-status')||{}).value||'';
+  var keyword=(document.getElementById('f-crm-keyword')||{}).value||'';
+
+  // 更新業務下拉
+  var salesList=[];
+  data.forEach(function(r){if(r.sales&&salesList.indexOf(r.sales)<0) salesList.push(r.sales);});
+  var sel=document.getElementById('f-crm-sales');
+  if(sel){var cur=sel.value;sel.innerHTML='<option value="">全部</option>'+salesList.map(function(s){return '<option value="'+escH(s)+'"'+(s===cur?' selected':'')+'>'+escH(s)+'</option>';}).join('');}
+
+  var filtered=data.filter(function(r){
+    if(sales&&r.sales!==sales) return false;
+    if(customer&&!matchQ(r.customer,customer)) return false;
+    if(model&&!matchQ(r.model,model)) return false;
+    if(delivery&&!matchQ(r.delivery,delivery)) return false;
+    if(status&&!matchQ(r.status,status)) return false;
+    if(keyword&&!matchQ(r.raw,keyword)) return false;
+    return true;
+  });
+
+  // 統計
+  var statsEl=document.getElementById('crm-stats-row');
+  if(statsEl){
+    statsEl.innerHTML=
+      '<span class="stat-pill">總筆數 <b>'+data.length+'</b></span>'
+      +'<span class="stat-pill">業務人數 <b>'+salesList.length+'</b></span>'
+      +(filtered.length<data.length?'<span class="stat-pill" style="color:var(--accent);border-color:var(--accent);">篩選結果 <b>'+filtered.length+'</b> 筆</span>':'');
+  }
+
+  var emptyHint=document.getElementById('crm-empty-hint');
+  var recordsEl=document.getElementById('crm-records');
+
+  if(data.length===0){
+    if(emptyHint) emptyHint.style.display='block';
+    if(recordsEl) recordsEl.style.display='none';
+    return;
+  }
+
+  if(emptyHint) emptyHint.style.display='none';
+  if(recordsEl) recordsEl.style.display='block';
+
+  var q=keyword||customer||model||delivery||status;
+
+  if(!filtered.length){
+    recordsEl.innerHTML='<div class="empty-state"><i class="fa-solid fa-inbox" style="font-size:36px;display:block;margin-bottom:12px;"></i>查無符合紀錄</div>';
+    return;
+  }
+
+  recordsEl.innerHTML=filtered.map(function(r){
+    // 判斷狀態顏色
+    var statusBadge='badge-gray';
+    var s=r.status.toLowerCase();
+    if(s.indexOf('出货')>-1||s.indexOf('出貨')>-1||s.indexOf('已出')>-1) statusBadge='badge-teal';
+    else if(s.indexOf('合约')>-1||s.indexOf('合約')>-1) statusBadge='badge-green';
+    else if(s.indexOf('订单')>-1||s.indexOf('訂單')>-1) statusBadge='badge-blue';
+    else if(s.indexOf('詢單')>-1||s.indexOf('询单')>-1||s.indexOf('議價')>-1||s.indexOf('议价')>-1) statusBadge='badge-amber';
+
+    return '<div class="msg-card">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">'
+        +'<div style="flex:1;min-width:0;">'
+          +'<div style="display:flex;align-items:baseline;gap:5px;flex-wrap:wrap;">'
+            +'<span style="font-size:15px;font-weight:700;color:var(--text-h);"><i class="fa-regular fa-building" style="color:var(--accent);font-size:12px;margin-right:4px;"></i>'+hl(r.customer,customer||keyword)+'</span>'
+            +'<span style="color:var(--border2);font-size:13px;">/</span>'
+            +'<span style="font-size:13px;color:var(--text-m);"><i class="fa-solid fa-user-tie" style="font-size:11px;margin-right:3px;"></i>'+hl(r.sales,keyword)+'</span>'
+          +'</div>'
+          +'<div style="font-size:13px;color:var(--text-s);margin-top:2px;"><i class="fa-solid fa-microchip" style="font-size:10px;margin-right:4px;"></i>'+hl(r.model,model||keyword)+'</div>'
+        +'</div>'
+        +'<div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;">'
+          +'<span style="font-size:11px;color:var(--text-s);">'+escH(r.sheet)+'</span>'
+        +'</div>'
+      +'</div>'
+      +'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:9px;">'
+        +(r.qty?'<span class="badge badge-gray"><i class="fa-solid fa-desktop" style="font-size:9px;"></i> '+hl(String(r.qty),keyword)+' 台</span>':'')
+        +(r.delivery?'<span class="badge badge-amber"><i class="fa-regular fa-calendar" style="font-size:9px;"></i> '+hl(r.delivery,delivery||keyword)+'</span>':'')
+      +'</div>'
+      +(r.status?'<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">'
+        +'<div style="font-size:11px;color:var(--text-s);margin-bottom:3px;">最新進度</div>'
+        +'<div class="badge '+statusBadge+'" style="font-size:12px;padding:3px 10px;border-radius:6px;max-width:100%;white-space:normal;line-height:1.5;">'+hl(r.status,status||keyword)+'</div>'
+        +'</div>':'')
+    +'</div>';
+  }).join('');
+}
+function filterCRM(){ renderCRM(crmData); }
+function clearCRMFilter(){
+  ['f-crm-sales','f-crm-customer','f-crm-model','f-crm-delivery','f-crm-status','f-crm-keyword'].forEach(function(id){
+    var el=document.getElementById(id); if(el) el.value='';
+  });
+  renderCRM(crmData);
 }
 </script>
 </body>
 </html>
+
 
 
 
