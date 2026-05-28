@@ -623,20 +623,22 @@ function renderUnified(){
       }).join('');
 
       return '<div class="model-block">'
-        +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">'
-          +'<i class="fa-solid fa-microchip" style="color:var(--accent);font-size:12px;"></i>'
-          +'<span style="font-size:14px;font-weight:700;color:var(--text-h);">'+hl(mk,q)+'</span>'
-          +'<span style="font-size:12px;color:var(--text-s);">'+records.length+' 筆紀錄</span>'
+        +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:8px 10px;background:var(--bg);border-radius:8px;border-left:3px solid var(--border2);">'
+          +'<i class="fa-solid fa-microchip" style="color:var(--text-m);font-size:11px;"></i>'
+          +'<span style="font-size:13px;font-weight:600;color:var(--text-b);font-family:monospace,sans-serif;letter-spacing:0.5px;">'+hl(mk,q)+'</span>'
+          +'<span style="font-size:11px;color:var(--text-s);">'+records.length+' 筆</span>'
         +'</div>'
         +recordsHtml
       +'</div>';
     }).join('');
 
     return '<div class="company-card">'
-      +'<div class="company-header">'
-        +'<i class="fa-regular fa-building" style="color:var(--accent);font-size:14px;"></i>'
-        +'<span style="font-size:16px;font-weight:700;color:var(--text-h);">'+hl(companyName,q)+'</span>'
-        +'<span style="font-size:12px;color:var(--text-s);">'+modelKeys.length+' 個機型</span>'
+      +'<div class="company-header" style="background:linear-gradient(135deg,#deeaf8 0%,#e8f0fa 100%);border-bottom:2px solid var(--accent);">'
+        +'<div style="background:var(--accent);border-radius:7px;padding:5px 8px;display:inline-flex;align-items:center;">'
+          +'<i class="fa-regular fa-building" style="color:#fff;font-size:13px;"></i>'
+        +'</div>'
+        +'<span style="font-size:17px;font-weight:800;color:var(--accent);letter-spacing:0.3px;">'+hl(companyName,q)+'</span>'
+        +'<span style="font-size:11px;color:var(--accent);opacity:0.7;background:rgba(59,118,212,0.1);border-radius:10px;padding:2px 8px;">'+modelKeys.length+' 個機型</span>'
       +'</div>'
       +modelsHtml
     +'</div>';
@@ -725,7 +727,13 @@ function renderStats(){
         +(r.qty?'<span><i class="fa-solid fa-desktop" style="font-size:10px;margin-right:3px;"></i>'+String(r.qty).replace(/[台台]/g,'').trim()+' 台</span>':'')
         +(r.delivery?'<span><i class="fa-regular fa-calendar" style="font-size:10px;margin-right:3px;"></i>'+escH(r.delivery)+'</span>':'')
       +'</div>'
-      +(r.statusText?'<div style="margin-top:5px;color:var(--text-s);">進度：'+escH(r.statusText)+'</div>':'')
+      +(r.raw||r.statusText?'<div style="margin-top:6px;">'
+        +'<button onclick="toggleExpand(this)" style="font-size:11px;color:var(--accent);background:none;border:none;cursor:pointer;padding:0;"><i class="fa-solid fa-chevron-down" style="margin-right:3px;font-size:10px;"></i> 展開完整訊息</button>'
+        +'<div class="expand-content" style="display:none;margin-top:6px;">'
+          +(r.statusText?'<div style="font-size:12px;color:var(--text-s);margin-bottom:4px;">進度：'+escH(r.statusText)+'</div>':'')
+          +(r.raw?'<div style="font-size:12px;color:var(--text-s);line-height:1.6;white-space:pre-wrap;background:var(--bg);border-radius:6px;padding:8px;">'+escH(r.raw)+'</div>':'')
+        +'</div>'
+      +'</div>':'')
     +'</div>';
   }
 
@@ -1100,13 +1108,18 @@ function debounceStats(){
 }
 
 function toggleExpand(btn){
-  var content=btn.parentNode.querySelector('.expand-content');
+  var wrapper=btn.parentNode;
+  var content=wrapper.querySelector('.expand-content');
   var icon=btn.querySelector('i');
   if(!content) return;
   var isOpen=content.style.display!=='none';
   content.style.display=isOpen?'none':'block';
   icon.className=isOpen?'fa-solid fa-chevron-down':'fa-solid fa-chevron-up';
-  btn.childNodes[1]&&(btn.childNodes[1].textContent=isOpen?' 展開完整訊息':' 收起');
+  // 更新按鈕文字
+  var spans=btn.childNodes;
+  for(var i=0;i<spans.length;i++){
+    if(spans[i].nodeType===3){spans[i].textContent=isOpen?' 展開完整訊息':' 收起';break;}
+  }
 }
 function closeDetail(){document.getElementById('detail-modal').style.display='none';}
 </script>
