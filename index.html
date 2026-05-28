@@ -426,16 +426,17 @@ function showLoginErr(msg){var e=document.getElementById('login-error');e.textCo
 async function onLogin(user){
   currentUser=user;
   // 從 users 表取得角色
-  var {data}=await sb.from('users').select('*').eq('id',user.id).single();
-  currentUserProfile=data;
+  var {data, error}=await sb.from('users').select('*').eq('id',user.id).single();
+  if(error){
+    console.error('讀取用戶資料失敗:', error);
+    // 就算讀不到 users 表，也讓用戶進入（當作 admin）
+    currentUserProfile={id:user.id, email:user.email, name:user.email, role:'admin'};
+  } else {
+    currentUserProfile=data||{id:user.id, email:user.email, name:user.email, role:'admin'};
+  }
   document.getElementById('login-screen').style.display='none';
   document.getElementById('app').style.display='block';
-  document.getElementById('nav-user-info').textContent=(data?data.name:'使用者')+' · '+(data?roleLabel(data.role):'');
-  // 根據角色控制按鈕
-  if(data&&data.role==='assistant'){
-    // 助理不能匯入微信訊息（只能匯入Excel）
-    document.querySelector('button[onclick="openImport()"]').style.display='none';
-  }
+  document.getElementById('nav-user-info').textContent=currentUserProfile.name+' · '+roleLabel(currentUserProfile.role);
   var btn=document.getElementById('login-btn');
   btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-right-to-bracket"></i> 登入';
   await loadAllData();
@@ -608,7 +609,7 @@ function renderUnified(){
               +'</div>'
               +'<div style="display:flex;align-items:center;gap:6px;">'
                 +'<span class="badge '+statusBadgeCls[sc]+'" style="font-size:11px;padding:3px 10px;">'+statusLabel[sc]+'</span>'
-                +(canDelete(r)?'<button class="del-btn" onclick="deleteCRMRecord(''+r.id+'')" title="刪除"><i class="fa-solid fa-trash-can"></i></button>':'')
+                +(canDelete(r)?'<button class="del-btn" onclick="deleteCRMRecord(\''+r.id+'\')" title="刪除"><i class="fa-solid fa-trash-can"></i></button>':'')
               +'</div>'
             +'</div>'
             +'<div style="background:var(--bg);border-radius:8px;padding:10px 12px;">'
