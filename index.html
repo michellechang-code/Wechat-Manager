@@ -593,35 +593,33 @@ function renderUnified(){
           +'</div>';
         } else {
           // CRM
-          var latestWeek=r.week_w2||r.week_w1||r.sheet||'';
-          var prevWeek=r.week_w2?r.week_w1:'';
-          var latestStatus=r.week_w2?r.status_w2:r.status_w1;
-          var prevStatus=r.week_w2?r.status_w1:'';
+          var latestWeek=r.week_w2||r.week_w1||'';
+          var prevWeek=(r.week_w2&&r.week_w1)?r.week_w1:'';
+          var latestStatus=r.status_w2||r.status_w1||'';
+          var prevStatus=(r.status_w2&&r.status_w1)?r.status_w1:'';
           var sc=classifyStatus(latestStatus);
           return '<div class="record-row">'
             +'<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">'
               +'<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">'
                 +'<span class="badge-crm"><i class="fa-solid fa-table" style="margin-right:3px;"></i>CRM</span>'
                 +(r.sales?'<span style="font-size:12px;color:var(--text-m);"><i class="fa-solid fa-user-tie" style="font-size:10px;margin-right:2px;"></i>'+escH(r.sales)+'</span>':'')
-                +(latestWeek?'<span style="font-size:11px;color:var(--text-s);">'+escH(latestWeek)+'</span>':'')
                 +(r.delivery?'<span class="badge badge-amber" style="font-size:10px;"><i class="fa-regular fa-calendar" style="font-size:9px;"></i> 需求：'+escH(r.delivery)+'</span>':'')
                 +(r.qty?'<span class="badge badge-gray" style="font-size:10px;">'+escH(String(r.qty).replace(/[台台]/g,'').trim())+' 台</span>':'')
               +'</div>'
-              +'<div style="display:flex;align-items:center;gap:6px;">'
-                +'<span class="badge '+statusBadgeCls[sc]+'" style="font-size:10px;">'+statusLabel[sc]+'</span>'
+              +'<div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">'
                 +(canDelete(r)?'<button class="del-btn" onclick="deleteCRMRecord(\''+r.id+'\')" title="刪除"><i class="fa-solid fa-trash-can"></i></button>':'')
               +'</div>'
             +'</div>'
-            // 最新兩週進度
-            +'<div style="margin-top:8px;padding-top:6px;border-top:1px solid var(--border);">'
-              +'<div class="crm-expand-wrap">'
-                +'<button onclick="toggleExpandCRM(this)" style="font-size:11px;color:var(--accent);background:none;border:none;cursor:pointer;padding:0;margin-bottom:4px;display:flex;align-items:center;gap:3px;"><i class="fa-solid fa-chevron-down" style="font-size:10px;"></i><span> 展開進度詳情</span></button>'
-                +'<div class="crm-expand-content" style="display:none;">'
-                  +(latestWeek?'<div style="font-size:11px;color:var(--text-s);margin-bottom:3px;font-weight:600;">'+escH(latestWeek)+' 最新進度</div>':'')
-                  +'<div style="font-size:13px;color:var(--text-b);font-weight:500;margin-bottom:6px;line-height:1.5;">'+(latestStatus?hl(latestStatus,q):'（無進度記錄）')+'</div>'
-                  +(prevStatus&&prevWeek?'<div style="font-size:11px;color:var(--text-s);padding-top:6px;border-top:1px solid var(--border);"><b>'+escH(prevWeek)+'：</b>'+hl(prevStatus,q)+'</div>':'')
+            // 進度直接顯示
+            +'<div style="margin-top:8px;padding-top:7px;border-top:1px solid var(--border);">'
+              +(latestWeek?'<div style="font-size:10px;color:var(--text-s);margin-bottom:3px;letter-spacing:0.3px;">'+escH(latestWeek)+'</div>':'')
+              +'<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;">'
+                +'<div style="font-size:13px;color:var(--text-b);font-weight:500;line-height:1.5;flex:1;">'
+                  +(latestStatus?hl(latestStatus,q):'<span style="color:var(--text-s);">（無進度記錄）</span>')
                 +'</div>'
+                +'<span class="badge '+statusBadgeCls[sc]+'" style="font-size:10px;flex-shrink:0;">'+statusLabel[sc]+'</span>'
               +'</div>'
+              +(prevStatus&&prevWeek?'<div style="font-size:11px;color:var(--text-s);margin-top:5px;padding-top:5px;border-top:1px dashed var(--border);"><b>'+escH(prevWeek)+'：</b>'+hl(prevStatus,q)+'</div>':'')
             +'</div>'
           +'</div>';
         }
