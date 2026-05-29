@@ -853,7 +853,7 @@ async function deleteEngRecord(id){
 }
 
 // ══ 匯入微信訊息 ════════════════════════════════════════════
-function openImport(){document.getElementById('import-modal').style.display='flex';document.getElementById('parse-result').style.display='none';}
+function openImport(){document.getElementById('import-modal').style.display='flex';document.getElementById('parse-result').style.display='none';setMsgType(currentTab==='engineer'?'engineer':'customer');}
 function closeImport(){document.getElementById('import-modal').style.display='none';}
 function setMsgType(type){
   currentMsgType=type;
@@ -1161,4 +1161,3 @@ function closeDetail(){document.getElementById('detail-modal').style.display='no
 </script>
 </body>
 </html>
-
