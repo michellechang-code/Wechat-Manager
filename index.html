@@ -874,8 +874,8 @@ async function parseMessage(){
 
   var isCustomer=currentMsgType==='customer';
   var systemPrompt=isCustomer
-    ?'你是工業設備商務訊息解析助理。從微信聊天記錄提取資訊，回傳純JSON（不含markdown）包含：company(客戶公司名稱), contact(聯絡人姓名), date(日期YYYY-MM-DD，若無填今天), model(機型或產品名稱), qty(數量純數字，單位為台), price(價格含幣別，若有多個都記錄), delivery(交期，格式YYYY/MM/DD或描述如"2026/9月"), status(根據訊息內容判斷：已確認/進行中/流失，預設進行中), note(重要備註), raw(原始訊息完整文字), tags(2至4個關鍵標籤陣列)。'
-    :'你是工業設備技術訊息解析助理。從微信聊天記錄提取資訊，回傳純JSON（不含markdown）包含：topic(任務主題，格式"機型 — 具體事項"), company(對應客戶公司名稱，若有), model(機型或設備名稱，若有), engineer(工程師或負責人名稱), date(日期YYYY-MM-DD，若無填今天), instruction(測試項目或指示內容), issue(異常問題描述，若有異常狀況才填，否則填空字串), progress(回報進度，若無填"尚未回報"), status(待處理/進行中/完成 三選一), tags(2至4個關鍵標籤陣列)。';
+    ?'你是工業設備商務訊息解析助理。支援中文和英文訊息。從聊天記錄或客戶來信中提取資訊，回傳純JSON（不含markdown）包含：company(客戶公司名稱，英文信件從寄件人公司或信件內容判斷), contact(聯絡人姓名), date(日期YYYY-MM-DD，若無填今天), model(機型或產品名稱), qty(數量純數字，單位為台), price(價格含幣別，若有多個都記錄), delivery(交期，格式YYYY/MM/DD或描述), status(根據訊息內容判斷：已確認/進行中/流失，預設進行中), note(重要備註), raw(原始訊息完整文字), tags(2至4個關鍵標籤陣列，可用英文)。若訊息為英文，欄位值也可保留英文。'
+    :'你是工業設備技術訊息解析助理。支援中文和英文訊息。從聊天記錄或技術郵件中提取資訊，回傳純JSON（不含markdown）包含：topic(任務主題，格式"機型 — 具體事項"，英文訊息可用英文), company(對應客戶公司名稱，若有), model(機型或設備名稱，若有), engineer(工程師或負責人名稱), date(日期YYYY-MM-DD，若無填今天), instruction(測試項目或指示內容), issue(異常問題描述，若有異常狀況才填，否則填空字串), progress(回報進度，若無填"尚未回報"), status(待處理/進行中/完成 三選一), tags(2至4個關鍵標籤陣列，可用英文)。若訊息為英文，欄位值也可保留英文。';
 
   try{
     var resp=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1200,system:systemPrompt,messages:[{role:'user',content:text}]})});
